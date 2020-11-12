@@ -24,13 +24,13 @@ function SignInScreen({ navigation }){
         <TextInput
           keyboardType = 'email-address'
           placeholder='email'
-          placeholderTextColor = 'white'
+          placeholderTextColor = 'gray'
           style={styles.input}
         />
         <TextInput
           placeholder={'password'}
           secureTextEntry={true}
-          placeholderTextColor = 'white'
+          placeholderTextColor = 'gray'
           style={styles.input}
         />
         
