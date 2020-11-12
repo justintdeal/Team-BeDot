@@ -4,9 +4,9 @@ import * as React from 'react';
 import { RootStackParamList } from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextInput, Button, Alert } from 'react-native';
 
-import { Text, TextInput, Button, View } from '../components/Themed';
+import { Text, View } from '../components/Themed';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -24,7 +24,7 @@ function SignInScreen(){
       <TextInput
         placeholder="Password"
       />
-      <Button title="Sign in" />
+      <Button title="Sign in" onPress={()=> Alert.alert('Alert')} />
     </View>
   );
 }
