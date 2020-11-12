@@ -1,4 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons'; 
+import { Foundation } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
@@ -20,24 +23,24 @@ export default function BottomTabNavigator() {
       initialRouteName="TabOne"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name="TabOne"
+        name="Games"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIconA name="ios-code" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Badges"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIconB name="ios-code" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabThree"
+        name="Profile"
         component={TabThreeNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIconC name="ios-code" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -46,9 +49,17 @@ export default function BottomTabNavigator() {
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
-function TabBarIcon(props: { name: string; color: string }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+function TabBarIconA(props: { name: string; color: string }) {
+  return <Entypo name="game-controller" size={24} color="black" />;
 }
+function TabBarIconB(props: { name: string; color: string }) {
+  return <Foundation name="sheriff-badge" size={24} color="black" />;
+}
+
+function TabBarIconC(props: { name: string; color: string }) {
+  return <FontAwesome name="user" size={24} color="black" />;
+}
+
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
