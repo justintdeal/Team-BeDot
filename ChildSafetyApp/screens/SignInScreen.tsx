@@ -1,6 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
-
+import { NavigationContainer } from '@react-navigation/native';
+import BottomTabNavigator from './BottomTabNavigator';
 import { RootStackParamList } from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,7 +15,7 @@ import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList
 export default SignInScreen;
 
 
-function SignInScreen(){
+function SignInScreen({ navigation }){
 
 
   return (
@@ -37,7 +38,8 @@ function SignInScreen(){
         <TouchableOpacity
           style={styles.button}
        >
-         <Button title="Sign in" style={styles.buttonText}> Sign Up / Login </Button>
+         <Button title="Sign in" style={styles.buttonText} onPress={()=> navigation.navigate('Home')
+}/>
        </TouchableOpacity>
         
       </View>
