@@ -1,52 +1,51 @@
-import React, { PureComponent } from "react";
-import { AppRegistry, StyleSheet, Dimensions, View } from "react-native";
-import { GameLoop } from "react-native-game-engine";
- 
-const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
-const RADIUS = 25;
- 
-export default class BestGameEver extends PureComponent {
-  constructor() {
-    super();
+import React, { Component } from "react";
+import { StyleSheet, View } from "react-native";
+import { GameEngine } from "react-native-game-engine";
+import Physics from "./Physics";
+import Entities from "./entities";
+import Health from './components/Health'
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
     this.state = {
-      x: WIDTH / 2 - RADIUS,
-      y: HEIGHT / 2 - RADIUS
+      running: true,
+      health:3
     };
+
+    this.gameEngine = null;
   }
- 
-  updateHandler = ({ touches, screen, layout, time }) => {
-    let move = touches.find(x => x.type === "move");
-    if (move) {
-      this.setState({
-        x: this.state.x + move.delta.pageX,
-        y: this.state.y + move.delta.pageY
-      });
-    }
-  };
- 
+
   render() {
     return (
-      <GameLoop style={styles.container} onUpdate={this.updateHandler}>
- 
-        <View style={[styles.player, { left: this.state.x, top: this.state.y }]} />
- 
-      </GameLoop>
+      <View style={styles.container}>
+        <GameEngine
+          ref={(ref) => {
+            this.gameEngine = ref;
+          }}
+          style={styles.gameContainer}
+          running={this.state.running}
+          systems={[Physics]}
+          entities={Entities()}
+        >
+            {/* <Health/> */}
+        </GameEngine>
+      </View>
     );
   }
 }
- 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF"
+    backgroundColor: "#232b2b",
   },
-  player: {
+  gameContainer: {
     position: "absolute",
-    backgroundColor: "pink",
-    width: RADIUS * 2,
-    height: RADIUS * 2,
-    borderRadius: RADIUS * 2
-  }
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
 });
- 
-AppRegistry.registerComponent("BestGameEver", () => BestGameEver);
