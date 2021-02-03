@@ -14,6 +14,7 @@ const Physics = (entities, { touches, time }) => {
     };
     Matter.Body.setPosition(baby, pos);
   }
+  
   if (Matter.SAT.collides(baby, entities.coffee.body).collided) {
     entities.coffee.renderer = null;
     entities.health.value = 2;
