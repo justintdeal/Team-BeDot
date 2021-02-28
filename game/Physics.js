@@ -1,5 +1,6 @@
 import Matter from "matter-js";
 import coffee from "./components/Coffee";
+import Constants from "./Constants";
 
 const Physics = (entities, { touches, time }) => {
   let engine = entities.physics.engine;
@@ -14,13 +15,14 @@ const Physics = (entities, { touches, time }) => {
     };
     Matter.Body.setPosition(baby, pos);
   }
-  
-  if (Matter.SAT.collides(baby, entities.coffee.body).collided) {
-    entities.coffee.renderer = null;
-    entities.health.value = 2;
-  }
-  Matter.Engine.update(engine, time.delta);
 
+  // if (Matter.SAT.collides(baby, entities.i.body).collided) {
+    // entities.coffee.renderer = null;
+    // entities.health.value = 2;
+  // }
+  Matter.Engine.update(engine, time.delta);
+  //console.log(Constants.MAX_HEIGHT);
+  //console.log(Constants.MAX_WIDTH);
   return entities;
 };
 export default Physics;
