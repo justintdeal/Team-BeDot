@@ -13,7 +13,7 @@ import Entities from "../entities";
 import NoteButton from "../components/NoteButton";
 import GameStatusBar from "../components/GameStatusBar";
 import MenuButton from "../components/MenuButton";
-
+import SpeakButton from "../components/SpeakButton";
 export default class LevelOne extends Component {
   constructor(props) {
     super(props);
@@ -21,29 +21,78 @@ export default class LevelOne extends Component {
     this.state = {
       engineRunning: true,
       modalVisible: false,
-      paused: false,
+      levelComplete: false,
+      collectNoteVisible: false,
+      inventorySize: 0,
+      inventoryCap: 2,
+      min: "00",
+      sec: "00",
+      msec: "00",
+      interactionIconVisible: false,
+      interactionModalVisible: false,
     };
 
     this.gameEngine = null;
   }
   pauseCheckCallback = (pauseStatus) => {
-    this.setState({ paused: pauseStatus });
-    this.setState({ modalVisible: !this.state.modalVisible });
-    this.setState({ engineRunning: !this.state.engineRunning });
+    // this.setState({ paused: pauseStatus });
+    // this.setState({ modalVisible: !this.state.modalVisible });
+    this.setState({ engineRunning: pauseStatus });
   };
 
-  handleResume = () => {
-    this.setState({ modalVisible: !this.state.modalVisible });
-    this.setState({ engineRunning: !this.state.engineRunning });
-    this.setState({ paused: false });
-  };
+  // handleResume = () => {
+  //   // this.setState({ modalVisible: !this.state.modalVisible });
+  //   this.setState({ engineRunning: !this.state.engineRunning });
+  //   this.setState({ paused: false });
+  // };
 
+  handleNextLevel = () => {
+    this.props.navigation.replace("LevelTwo");
+  };
   handleLevelRestart = () => {
     this.props.navigation.replace("LevelOne");
   };
 
   handleReturnToHome = () => {
     this.props.navigation.replace("Home");
+  };
+
+  handleCollectNote = () => {
+    this.setState({ inventorySize: this.state.inventorySize + 1 });
+  };
+
+  handleLevelComplete = () => {
+    // this.setState({ engineRunning: false });
+    // this.setState({ paused: true });
+    this.setState({ levelComplete: true });
+  };
+  getTime = (time) => {
+    this.setState({ min: time.min });
+    this.setState({ sec: time.sec });
+    this.setState({ msec: time.msec });
+  };
+  handleNPCInteraction = () => {
+    this.setState({ interactionModalVisible: true });
+  };
+  onEvent = (e) => {
+    if (e.type === "note-one-found" || e.type === "note-two-found") {
+      this.setState({ collectNoteVisible: true });
+    }
+    if (e.type === "npc-interact") {
+      console.log("here1");
+      this.setState({ interactionIconVisible: true });
+    }
+    if (e.type === "none") {
+      this.setState({ collectNoteVisible: false });
+      this.setState({ interactionIconVisible: false });
+    }
+    if (
+      e.type === "at-objective" &&
+      this.state.inventoryCap == this.state.inventorySize &&
+      this.state.levelComplete != true
+    ) {
+      this.handleLevelComplete();
+    }
   };
 
   render() {
@@ -54,26 +103,47 @@ export default class LevelOne extends Component {
           <Modal
             animationType="slide"
             transparent={true}
-            visible={modalVisible}
+            visible={this.state.interactionModalVisible}
             onRequestClose={() => {
               this.setModalVisible(!modalVisible);
             }}
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>PAUSED</Text>
-                {/* <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => this.setModalVisible(!modalVisible)}
-                >
-                </Pressable> */}
+                <Text style={styles.modalText}>
+                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL
+                </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
                 <MenuButton
-                  text="RESUME"
-                  onPress={this.handleResume}
+                  text="OK"
+                  onPress={() => {
+                    this.setState({ interactionModalVisible: false });
+                  }}
+                ></MenuButton>
+              </View>
+            </View>
+          </Modal>
+        </View>
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.levelComplete}
+            onRequestClosed={() => {
+              this.setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>
+                  Time: {this.state.min}:{this.state.sec}:{this.state.msec}
+                </Text>
+                <MenuButton
+                  text="CONTINUE"
+                  onPress={this.handleNextLevel}
                 ></MenuButton>
                 <MenuButton
-                  text="RESTART"
+                  text="PLAY AGAIN"
                   onPress={this.handleLevelRestart}
                 ></MenuButton>
                 <MenuButton
@@ -91,14 +161,32 @@ export default class LevelOne extends Component {
           style={styles.gameContainer}
           running={this.state.engineRunning}
           systems={[Physics]}
+          onEvent={this.onEvent}
           entities={Entities()}
         ></GameEngine>
         <GameStatusBar
           pauseUpdater={this.pauseCheckCallback}
-          resume={!this.state.paused}
+          inventorySize={this.state.inventorySize}
+          inventoryCap={this.state.inventoryCap}
+          navigation={this.props.navigation}
+          levelComplete={this.state.levelComplete}
+          timeToLevel={this.getTime}
+          currentLevel={"LevelOne"}
         />
-        <View style={{alignItems: "flex-end"}}>
-          <NoteButton style={styles.NoteButton} text={"Collect Note"} />
+        <View style={{ alignItems: "flex-end" }}>
+          <NoteButton
+            style={styles.NoteButton}
+            text={"Collect Note"}
+            visible={this.state.collectNoteVisible}
+            onPress={this.handleCollectNote}
+          />
+
+          <SpeakButton
+            style={styles.NoteButton}
+            text={"Speak"}
+            visible={this.state.interactionIconVisible}
+            onPress={this.handleNPCInteraction}
+          />
         </View>
       </View>
     );
