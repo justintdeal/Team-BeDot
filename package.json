@@ -11,7 +11,8 @@
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
-    "expo": "~40.0.0",
+    "expo": "^40.0.1",
+    "expo-av": "~8.7.0",
     "expo-status-bar": "~1.0.3",
     "matter-js": "^0.16.1",
     "poly-decomp": "^0.3.0",
@@ -28,8 +29,7 @@
     "react-native-web": "~0.13.12",
     "react-native-webview": "^11.2.1",
     "react-navigation": "^4.4.4",
-    "react-navigation-stack": "^2.10.3",
-    "expo-av": "~8.7.0"
+    "react-navigation-stack": "^2.10.3"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

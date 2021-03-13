@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { StyleSheet, View, Modal, Text } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Movement from "../systems/Movement";
-import Entities from "../entities/Level2Entities";
-import Dispatches from "../systems/Level2Dispatches";
+import Entities from "../entities/Level3Entities";
+import Dispatches from "../systems/Level3Dispatches";
 import NoteButton from "../components/NoteButton";
 import GameStatusBar from "../components/GameStatusBar";
-import MenuButton from "../components/MenuButton";
 import SpeakButton from "../components/SpeakButton";
+import MenuButton from "../components/MenuButton";
 
-export default class LevelTwo extends Component {
+export default class LevelThree extends Component {
   constructor(props) {
     super(props);
 
@@ -37,7 +37,7 @@ export default class LevelTwo extends Component {
     this.props.navigation.replace("LevelThree");
   };
   handleLevelRestart = () => {
-    this.props.navigation.replace("LevelTwo");
+    this.props.navigation.replace("LevelThree");
   };
 
   handleReturnToHome = () => {
@@ -56,7 +56,6 @@ export default class LevelTwo extends Component {
     this.setState({ sec: time.sec });
     this.setState({ msec: time.msec });
   };
-
   handleNPCInteraction = () => {
     this.setState({ interactionModalVisible: true });
   };
@@ -66,8 +65,8 @@ export default class LevelTwo extends Component {
       this.setState({ collectNoteVisible: true });
     }
     if (e.type === "npc-interact") {
-      this.setState({ interactionIconVisible: true });
-    }
+        this.setState({ interactionIconVisible: true });
+      }
     if (e.type === "none") {
       this.setState({ collectNoteVisible: false });
     }
@@ -156,7 +155,7 @@ export default class LevelTwo extends Component {
           navigation={this.props.navigation}
           levelComplete={this.state.levelComplete}
           timeToLevel={this.getTime}
-          currentLevel={"LevelTwo"}
+          currentLevel={"LevelThree"}
         />
         <View style={{ alignItems: "flex-end" }}>
           <NoteButton
