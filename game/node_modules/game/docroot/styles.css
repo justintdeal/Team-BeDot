@@ -1,0 +1,63 @@
+
+body, td { font-family: "Times"; }
+
+td { border-collapse: collapse; }
+
+body {
+	background: #000;
+	margin: 0;
+	padding: 2%;
+}
+
+.bdy {
+	color: #eeddcc;
+	text-indent: 1em;
+}
+
+.title {
+	text-align: center;
+}
+
+.copr {
+	text-align: center;
+	font-size: 80%;
+	color: #ccaa00;
+}
+
+a { color: #aacc00; text-decoration: none; }
+
+a:hover { text-decoration: underline; }
+
+
+.boxtop {
+	border-top: solid 1px #ba9;
+	border-left: solid 1px #ba9;
+	border-right: solid 1px #ba9;
+	background-color: #665544;
+	color: #edc;
+	text-align: center;
+	padding: 0 1em;
+}
+
+.boxguts {
+	border: solid 1px #ba9;
+}
+
+.where {
+	border: solid 1px #ba9;
+	background: #654;
+	color: #edc;
+	text-align: center;
+}
+
+
+td {
+	vertical-align: top;
+	color: #edc;
+	padding: 0 1em;
+	margin: 0;
+	border-bottom: solid 1px #432;
+}
+
+
+

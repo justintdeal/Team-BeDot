@@ -16,6 +16,9 @@ export default function LevelSelect({ navigation }) {
   const launchLevelTwo = () => {
     navigation.navigate("LevelTwo");
   };
+  const launchLevelThree = () => {
+    navigation.navigate("LevelThree");
+  };
   const goHome = () => {
     navigation.navigate("Home");
   };
@@ -24,6 +27,7 @@ export default function LevelSelect({ navigation }) {
     <ImageBackground source={Background} style={styles.image}>
       <MenuButton text="LIVING ROOM" onPress={launchLevelOne}></MenuButton>
       <MenuButton text="KITCHEN" onPress={launchLevelTwo}></MenuButton>
+      <MenuButton text="POOL" onPress={launchLevelThree}></MenuButton>
       <MenuButton text="GO BACK" on onPress={goHome}></MenuButton>
     </ImageBackground>
   );

@@ -7,11 +7,11 @@ import Matter from "matter-js";
 
 const Level3Dispatches = (entities, { dispatch }) => {
   let player = entities.player.body;
-  if (Matter.SAT.collides(player, entities.diningTable.body).collided) {
+  if (Matter.SAT.collides(player, entities.pool.body).collided) {
     dispatch({ type: "note-one-found" });
-  } else if (Matter.SAT.collides(player, entities.topCabinet.body).collided) {
+  } else if (Matter.SAT.collides(player, entities.dog.body).collided) {
     dispatch({ type: "note-two-found" });
-  } else if (Matter.SAT.collides(player, entities.rightCabinet.body).collided) {
+  } else if (Matter.SAT.collides(player, entities.car.body).collided) {
     dispatch({ type: "at-objective" });
   } else if (Matter.SAT.collides(player, entities.npc.body).collided) {
     dispatch({ type: "npc-interact" });
