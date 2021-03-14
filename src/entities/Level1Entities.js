@@ -167,8 +167,8 @@ const Entities = () => {
 
   return {
     physics: { engine: engine, world: world },
-    player: { body: player, size: [45, 45], backgroundColor:"#88ccff", renderer: Player },
-    npc: { body: npc, size: [45, 45], backgroundColor: "#88ccff", renderer: Npc },
+    player: { body: player, size: [45, 45], backgroundColor:"#E6D2BA", renderer: Player },
+    npc: { body: npc, size: [45, 45], backgroundColor: "#E6D2BA", renderer: Npc },
     plant: {
       body: plant,
       size: [45, 45],

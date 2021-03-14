@@ -3,9 +3,11 @@ import { StyleSheet, View, Modal, Text } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Movement from "../systems/Movement";
 import Entities from "../entities/Level2Entities";
+import Dispatches from "../systems/Level2Dispatches";
 import NoteButton from "../components/NoteButton";
 import GameStatusBar from "../components/GameStatusBar";
 import MenuButton from "../components/MenuButton";
+import SpeakButton from "../components/SpeakButton";
 
 export default class LevelTwo extends Component {
   constructor(props) {
@@ -21,6 +23,8 @@ export default class LevelTwo extends Component {
       min: "00",
       sec: "00",
       msec: "00",
+      interactionIconVisible: false,
+      interactionModalVisible: false,
     };
 
     this.gameEngine = null;
@@ -30,7 +34,7 @@ export default class LevelTwo extends Component {
   };
 
   handleNextLevel = () => {
-    this.props.navigation.replace("LevelTwo");
+    this.props.navigation.replace("LevelThree");
   };
   handleLevelRestart = () => {
     this.props.navigation.replace("LevelTwo");
@@ -52,12 +56,21 @@ export default class LevelTwo extends Component {
     this.setState({ sec: time.sec });
     this.setState({ msec: time.msec });
   };
+
+  handleNPCInteraction = () => {
+    this.setState({ interactionModalVisible: true });
+  };
+
   onEvent = (e) => {
     if (e.type === "note-one-found" || e.type === "note-two-found") {
       this.setState({ collectNoteVisible: true });
     }
+    if (e.type === "npc-interact") {
+      this.setState({ interactionIconVisible: true });
+    }
     if (e.type === "none") {
       this.setState({ collectNoteVisible: false });
+      this.setState({ interactionIconVisible: false });
     }
     if (
       e.type === "at-objective" &&
@@ -76,16 +89,42 @@ export default class LevelTwo extends Component {
           <Modal
             animationType="slide"
             transparent={true}
+            visible={this.state.interactionModalVisible}
+            supportedOrientations={['landscape']}
+            onRequestClose={() => {
+              this.setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>
+                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL
+                </Text>
+                <Text style={styles.textStyle}>Hide Modal</Text>
+                <MenuButton
+                  text="OK"
+                  onPress={() => {
+                    this.setState({ interactionModalVisible: false });
+                  }}
+                ></MenuButton>
+              </View>
+            </View>
+          </Modal>
+        </View>
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
             visible={this.state.levelComplete}
+            supportedOrientations={['landscape']}
             onRequestClosed={() => {
               this.setModalVisible(!modalVisible);
             }}
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Time:</Text>
                 <Text style={styles.modalText}>
-                  {this.state.min}:{this.state.sec}:{this.state.msec}
+                  Time: {this.state.min}:{this.state.sec}:{this.state.msec}
                 </Text>
                 <MenuButton
                   text="CONTINUE"
@@ -109,7 +148,7 @@ export default class LevelTwo extends Component {
           }}
           style={styles.gameContainer}
           running={this.state.engineRunning}
-          systems={[Movement]}
+          systems={[Movement, Dispatches]}
           onEvent={this.onEvent}
           entities={Entities()}
         ></GameEngine>
@@ -129,6 +168,13 @@ export default class LevelTwo extends Component {
             visible={this.state.collectNoteVisible}
             onPress={this.handleCollectNote}
           />
+
+          <SpeakButton
+            style={styles.NoteButton}
+            text={"Speak"}
+            visible={this.state.interactionIconVisible}
+            onPress={this.handleNPCInteraction}
+          />
         </View>
       </View>
     );
@@ -138,7 +184,7 @@ export default class LevelTwo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#A61919",
+    backgroundColor: "#DBD7D2",
   },
   gameContainer: {
     position: "absolute",

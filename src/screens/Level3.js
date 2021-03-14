@@ -1,22 +1,15 @@
-/*
- * Level One Screen
- * React Native Game Engine Lives Here
- * Maintains the state of the game
- * is ugly rn because I need to modularize the modals
- */
-
 import React, { Component } from "react";
 import { StyleSheet, View, Modal, Text } from "react-native";
 import { GameEngine } from "react-native-game-engine";
-import Entities from "../entities/Level1Entities";
-import Dispatches from "../systems/Level1Dispatches";
+import Movement from "../systems/Movement";
+import Entities from "../entities/Level3Entities";
+import Dispatches from "../systems/Level3Dispatches";
 import NoteButton from "../components/NoteButton";
 import GameStatusBar from "../components/GameStatusBar";
-import MenuButton from "../components/MenuButton";
 import SpeakButton from "../components/SpeakButton";
-import Movement from "../systems/Movement";
+import MenuButton from "../components/MenuButton";
 
-export default class LevelOne extends Component {
+export default class LevelThree extends Component {
   constructor(props) {
     super(props);
 
@@ -36,70 +29,46 @@ export default class LevelOne extends Component {
 
     this.gameEngine = null;
   }
-
-  // This is a callback function that is passed as a
-  // prop to pause. When the pause button in the status bar
-  // is clicked the status bar calls this function which changes
-  // the pause state
   pauseCheckCallback = (pauseStatus) => {
     this.setState({ engineRunning: pauseStatus });
   };
 
-  //callback to take the user to the next level
   handleNextLevel = () => {
-    this.props.navigation.replace("LevelTwo");
+    this.props.navigation.replace("LevelThree");
   };
-
-  //callback to restart the level
   handleLevelRestart = () => {
-    this.props.navigation.replace("LevelOne");
+    this.props.navigation.replace("LevelThree");
   };
 
-  // go home callback
   handleReturnToHome = () => {
     this.props.navigation.replace("Home");
   };
 
-  // callback that is called when the user hits the Note Button
-  // updates the inventory by one
   handleCollectNote = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
   };
 
-  //callback that changes the level status to complete
-  // called after contacting the stairs with a full inventory
   handleLevelComplete = () => {
     this.setState({ levelComplete: true });
   };
-
-  //confusing process to get time from the timer component
-  // callback is passed to statusbar which passes it to timer.
-  // Time calls the function when level complete changes and updates
-  // the final level time
   getTime = (time) => {
     this.setState({ min: time.min });
     this.setState({ sec: time.sec });
     this.setState({ msec: time.msec });
   };
-
-  // function called by the speak button
-  // makes the npc dialog modal visible
   handleNPCInteraction = () => {
     this.setState({ interactionModalVisible: true });
   };
 
-  //Handles all of the collisions and information that comes from
-  //the system dispatches. (Level1Dispatches.js)
   onEvent = (e) => {
     if (e.type === "note-one-found" || e.type === "note-two-found") {
       this.setState({ collectNoteVisible: true });
     }
     if (e.type === "npc-interact") {
-      this.setState({ interactionIconVisible: true });
-    }
+        this.setState({ interactionIconVisible: true });
+      }
     if (e.type === "none") {
       this.setState({ collectNoteVisible: false });
-      this.setState({ interactionIconVisible: false });
     }
     if (
       e.type === "at-objective" &&
@@ -188,7 +157,7 @@ export default class LevelOne extends Component {
           navigation={this.props.navigation}
           levelComplete={this.state.levelComplete}
           timeToLevel={this.getTime}
-          currentLevel={"LevelOne"}
+          currentLevel={"LevelThree"}
         />
         <View style={{ alignItems: "flex-end" }}>
           <NoteButton
@@ -213,7 +182,7 @@ export default class LevelOne extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E6D2BA",
+    backgroundColor: "#DBD7D2",
   },
   gameContainer: {
     position: "absolute",

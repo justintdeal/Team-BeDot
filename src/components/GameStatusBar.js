@@ -96,6 +96,7 @@ export default class GameStatusBar extends Component {
             animationType="slide"
             transparent={true}
             visible={this.state.pauseModalVisible}
+            supportedOrientations={['landscape']}
             // onRequestClose={() => {
             //   this.setModalVisible(!modalVisible);
             // }}

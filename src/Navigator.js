@@ -14,6 +14,7 @@ import Settings from "./screens/Settings";
 
 import LevelOne from "./screens/Level1";
 import LevelTwo from "./screens/Level2";
+import LevelThree from "./screens/Level3";
 
 const screens = {
   Home: {
@@ -60,6 +61,13 @@ const screens = {
   },
   LevelTwo: {
     screen: LevelTwo,
+    navigationOptions: {
+      headerShown: false,
+      animationEnabled: false,
+    },
+  },
+  LevelThree: {
+    screen: LevelThree,
     navigationOptions: {
       headerShown: false,
       animationEnabled: false,
