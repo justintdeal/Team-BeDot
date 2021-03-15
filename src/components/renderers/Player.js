@@ -17,12 +17,12 @@ export default class Player extends Component {
           position: "absolute",
           left: x,
           top: y,
-          width: width,
-          height: height,
+          width: 100,
+          height: 100,
           backgroundColor: this.props.backgroundColor,
           resizeMode: "contain",
         }}
-        source={require("../../assets/player.png")}
+        source={require("../../assets/living-room/player.png")}
       />
     );
   }
