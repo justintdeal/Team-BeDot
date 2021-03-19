@@ -22,7 +22,7 @@ export default class Player extends Component {
           backgroundColor: this.props.backgroundColor,
           resizeMode: "contain",
         }}
-        source={require("../../assets/living-room/player.png")}
+        source={require("../../assets/player.png")}
       />
     );
   }
