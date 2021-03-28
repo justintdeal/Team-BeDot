@@ -17,14 +17,19 @@ export default class LevelTwo extends Component {
       engineRunning: true,
       modalVisible: false,
       levelComplete: false,
-      collectNoteVisible: false,
+      collectNote1Visible: false,
+      collectNote2Visible: false,
       inventorySize: 0,
       inventoryCap: 2,
       min: "00",
       sec: "00",
       msec: "00",
+      note1Collected: false,
+      note2Collected: false,
       interactionIconVisible: false,
       interactionModalVisible: false,
+      note1ModalVisible: false,
+      note2ModalVisible: false,
     };
 
     this.gameEngine = null;
@@ -44,9 +49,17 @@ export default class LevelTwo extends Component {
     this.props.navigation.replace("Home");
   };
 
-  handleCollectNote = () => {
+  handleCollectNote1 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
+    this.setState({ note1ModalVisible: true });
   };
+
+  // callback that is called when the user hits the Note Button
+  // updates the inventory by one
+  handleCollectNote2 = () => {
+    this.setState({ inventorySize: this.state.inventorySize + 1 });
+    this.setState({ note2ModalVisible: true });
+  }
 
   handleLevelComplete = () => {
     this.setState({ levelComplete: true });
@@ -62,14 +75,18 @@ export default class LevelTwo extends Component {
   };
 
   onEvent = (e) => {
-    if (e.type === "note-one-found" || e.type === "note-two-found") {
-      this.setState({ collectNoteVisible: true });
+    if (e.type === "note-one-found" && this.state.note1Collected == false) {
+      this.setState({ collectNote1Visible: true });
+    }
+    if (e.type === "note-two-found" && this.state.note2Collected == false) {
+      this.setState({ collectNote2Visible: true });
     }
     if (e.type === "npc-interact") {
       this.setState({ interactionIconVisible: true });
     }
     if (e.type === "none") {
-      this.setState({ collectNoteVisible: false });
+      this.setState({ collectNote1Visible: false });
+      this.setState({ collectNote2Visible: false });
       this.setState({ interactionIconVisible: false });
     }
     if (
@@ -165,10 +182,69 @@ export default class LevelTwo extends Component {
           <NoteButton
             style={styles.NoteButton}
             text={"Collect Note"}
-            visible={this.state.collectNoteVisible}
-            onPress={this.handleCollectNote}
+            visible={this.state.collectNote1Visible}
+            onPress={this.handleCollectNote1}
           />
+          <NoteButton
+            style={styles.NoteButton}
+            text={"Collect Note"}
+            visible={this.state.collectNote2Visible}
+            onPress={this.handleCollectNote2}
+          />
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.note1ModalVisible}
+            supportedOrientations={['landscape']}
+            onRequestClose={() => {
+              this.setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>
+                Note #1! Unsure if this is thermos or medicine poisoning
+                </Text>
+                <Text style={styles.textStyle}>Hide Modal</Text>
+                <MenuButton
+                  text="OK"
+                  onPress={() => {
+                    this.setState({ note1ModalVisible: false });
+                    this.setState({ note1Collected: true});
+                  }}
+                ></MenuButton>
+              </View>
+            </View>
+          </Modal>
 
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.note2ModalVisible}
+            supportedOrientations={['landscape']}
+            onRequestClose={() => {
+              this.setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>
+                  Note #2! - Didn't find cabinet safety info.
+                </Text>
+                <Text style={styles.modalText}>
+                  Change to stove and burn safety?
+                </Text>
+                <Text style={styles.textStyle}>Hide Modal</Text>
+                <MenuButton
+                  text="OK"
+                  onPress={() => {
+                    this.setState({ note2ModalVisible: false });
+                    this.setState({ note2Collected: true});
+                  }}
+                ></MenuButton>
+              </View>
+            </View>
+          </Modal>
           <SpeakButton
             style={styles.NoteButton}
             text={"Speak"}

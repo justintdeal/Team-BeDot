@@ -24,14 +24,19 @@ export default class LevelOne extends Component {
       engineRunning: true,
       modalVisible: false,
       levelComplete: false,
-      collectNoteVisible: false,
+      collectNote1Visible: false,
+      collectNote2Visible: false,
       inventorySize: 0,
       inventoryCap: 2,
       min: "00",
       sec: "00",
       msec: "00",
+      note1Collected: false,
+      note2Collected: false,
       interactionIconVisible: false,
       interactionModalVisible: false,
+      note1ModalVisible: false,
+      note2ModalVisible: false,
     };
 
     this.gameEngine = null;
@@ -62,10 +67,17 @@ export default class LevelOne extends Component {
 
   // callback that is called when the user hits the Note Button
   // updates the inventory by one
-  handleCollectNote = () => {
+  handleCollectNote1 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
+    this.setState({ note1ModalVisible: true });
   };
 
+  // callback that is called when the user hits the Note Button
+  // updates the inventory by one
+  handleCollectNote2 = () => {
+    this.setState({ inventorySize: this.state.inventorySize + 1 });
+    this.setState({ note2ModalVisible: true });
+  };
   //callback that changes the level status to complete
   // called after contacting the stairs with a full inventory
   handleLevelComplete = () => {
@@ -91,14 +103,18 @@ export default class LevelOne extends Component {
   //Handles all of the collisions and information that comes from
   //the system dispatches. (Level1Dispatches.js)
   onEvent = (e) => {
-    if (e.type === "note-one-found" || e.type === "note-two-found") {
-      this.setState({ collectNoteVisible: true });
+    if (e.type === "note-one-found" && this.state.note1Collected == false) {
+      this.setState({ collectNote1Visible: true });
+    }
+    if (e.type === "note-two-found" && this.state.note2Collected == false) {
+      this.setState({ collectNote2Visible: true });
     }
     if (e.type === "npc-interact") {
       this.setState({ interactionIconVisible: true });
     }
     if (e.type === "none") {
-      this.setState({ collectNoteVisible: false });
+      this.setState({ collectNote1Visible: false });
+      this.setState({ collectNote2Visible: false });
       this.setState({ interactionIconVisible: false });
     }
     if (
@@ -194,10 +210,92 @@ export default class LevelOne extends Component {
           <NoteButton
             style={styles.NoteButton}
             text={"Collect Note"}
-            visible={this.state.collectNoteVisible}
-            onPress={this.handleCollectNote}
+            visible={this.state.collectNote1Visible}
+            onPress={this.handleCollectNote1}
           />
+          <NoteButton
+            style={styles.NoteButton}
+            text={"Collect Note"}
+            visible={this.state.collectNote2Visible}
+            onPress={this.handleCollectNote2}
+          />
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.note1ModalVisible}
+            supportedOrientations={['landscape']}
+            onRequestClose={() => {
+              this.setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>
+                Coins:  
+                </Text>
+                <Text style={styles.modalText}>
+                  Choose a toy chest without a lid. 
+                  Toys should be large enough — at least 1¼" (3 centimeters) in diameter and 2¼" (6 centimeters) in length — so that they can't be swallowed or lodged in the windpipe. 
+                  Avoid marbles, coins, balls, and games with balls that are 1.75 inches (4.4 centimeters) in diameter or less because they can become lodged in the throat above the windpipe and cause trouble with breathing. 
+                  </Text>
+                  <Text style={styles.modalText}>
+                  Source: https://kidshealth.org/en/parents/products-toys.html 
+                </Text>
+                <Text style={styles.textStyle}>Hide Modal</Text>
+                <MenuButton
+                  text="OK"
+                  onPress={() => {
+                    this.setState({ note1ModalVisible: false });
+                    this.setState({ note1Collected: true});
+                  }}
+                ></MenuButton>
+              </View>
+            </View>
+          </Modal>
 
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.note2ModalVisible}
+            supportedOrientations={['landscape']}
+            onRequestClose={() => {
+              this.setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>
+                Outlets: 
+                </Text>
+                <Text style={styles.modalText}>
+                Outlet Covers are great solutions to prevent accidental electrocutions. Nearly one-third of accidents occur when a child inserts common household items into receptacles, 70 percent of them occurring when adults are present.  Items that children insert into outlets can be found anywhere, and include: 
+                </Text>
+                <Text style={styles.modalText}>
+                Hairpins, Keys, Plugs, Paper clips and staples, Tools, Jewelry, Belt buckles, Nail files, Knives 
+                </Text>
+                <Text style={styles.modalText}>
+                And more 
+                </Text>
+                <Text style={styles.modalText}>
+                Approximately 100 kids die each year by electrocution, 2 and many others are seriously hurt. 
+                </Text>
+                <Text style={styles.modalText}>
+                95 percent of injuries resulting from electrical outlets will involve burns. Though they range in severity, it is important to understand that burns are very serious in young children whose skin is thin and offers little resistance to electric flow or heat. 
+                </Text>
+                <Text style={styles.modalText}>
+                Source: https://mrelectric.com/child-proof-outlets  
+                </Text>
+                <Text style={styles.textStyle}>Hide Modal</Text>
+                <MenuButton
+                  text="OK"
+                  onPress={() => {
+                    this.setState({ note2ModalVisible: false });
+                    this.setState({ note2Collected: true});
+                  }}
+                ></MenuButton>
+              </View>
+            </View>
+          </Modal>
           <SpeakButton
             style={styles.NoteButton}
             text={"Speak"}
