@@ -4,6 +4,9 @@ import Wall from "../components/Wall";
 import Constants from "../Constants";
 import Circle from "../components/Circle";
 import Npc from "../components/renderers/Npc";
+import Bookshelf from "../components/renderers/Bookshelf";
+import Couch from "../components/renderers/Couch";
+import Fireplace from "../components/renderers/Fireplace";
 
 const Entities = () => {
   let engine = Matter.Engine.create({ enableSleeping: false });
@@ -39,7 +42,7 @@ const Entities = () => {
     75,
     { isStatic: true }
   );
-  let stove = Matter.Bodies.rectangle(
+  let fireplace = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.3,
     Constants.MAX_HEIGHT * 0.95,
     75,
@@ -114,6 +117,7 @@ const Entities = () => {
     20,
     { isStatic: true }
   );
+  
 
   let top_wall = Matter.Bodies.rectangle(
     (x = 0),
@@ -150,7 +154,7 @@ const Entities = () => {
     npc,
     plant,
     stairs,
-    stove,
+    fireplace,
     desk,
     chair,
     cir_table,
@@ -167,7 +171,7 @@ const Entities = () => {
 
   return {
     physics: { engine: engine, world: world },
-    player: { body: player, size: [45, 45], backgroundColor:"#88ccff", renderer: Player },
+    player: { body: player, size: [100, 100], backgroundColor:"#88ccff", renderer: Player },
     npc: { body: npc, size: [45, 45], backgroundColor: "#88ccff", renderer: Npc },
     plant: {
       body: plant,
@@ -181,11 +185,11 @@ const Entities = () => {
       color: "black",
       renderer: Wall,
     },
-    stove: {
-      body: stove,
-      size: [75, 50],
+    fireplace: {
+      body: fireplace,
+      size: [100, 100],
       color: "black",
-      renderer: Wall,
+      renderer: Fireplace,
     },
     desk: {
       body: desk,
@@ -209,7 +213,7 @@ const Entities = () => {
       body: bookshelf,
       color: "black",
       size: [30, 60],
-      renderer: Wall,
+      renderer: Bookshelf,
     },
     lamp: {
       body: lamp,
@@ -233,9 +237,9 @@ const Entities = () => {
 
     couch: {
       body: couch,
-      size: [65, 20],
+      size: [100, 100],
       color: "black",
-      renderer: Wall,
+      renderer: Couch,
     },
 
     tv: {

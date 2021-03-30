@@ -17,8 +17,8 @@ export default class Player extends Component {
           position: "absolute",
           left: x,
           top: y,
-          width: 100,
-          height: 100,
+          width: width,
+          height: height,
           backgroundColor: this.props.backgroundColor,
           resizeMode: "contain",
         }}
