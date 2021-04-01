@@ -4,6 +4,13 @@ import Wall from "../components/Wall";
 import Constants from "../Constants";
 import Circle from "../components/Circle";
 import Npc from "../components/renderers/Npc";
+import TV from "../components/renderers/TV";
+import Table from "../components/renderers/Table";
+import Couch from "../components/renderers/Couch";
+import SideTable from "../components/renderers/SideTable";
+import Stairs from "../components/renderers/Stairs"
+import Plant from "../components/renderers/Plant"
+import Bookshelf from "../components/renderers/Bookshelf"
 
 const Entities = () => {
   let engine = Matter.Engine.create({ enableSleeping: false });
@@ -173,13 +180,13 @@ const Entities = () => {
       body: plant,
       size: [45, 45],
       color: "black",
-      renderer: Wall,
+      renderer: Plant,
     },
     stairs: {
       body: stairs,
       size: [55, 75],
       color: "black",
-      renderer: Wall,
+      renderer: Stairs,
     },
     stove: {
       body: stove,
@@ -209,7 +216,7 @@ const Entities = () => {
       body: bookshelf,
       color: "black",
       size: [30, 60],
-      renderer: Wall,
+      renderer: Bookshelf,
     },
     lamp: {
       body: lamp,
@@ -221,28 +228,28 @@ const Entities = () => {
       body: sideTable,
       size: [20, 20],
       color: "black",
-      renderer: Wall,
+      renderer: SideTable,
     },
 
     coffeeTable: {
       body: coffeeTable,
       size: [45, 25],
       color: "black",
-      renderer: Wall,
+      renderer: Table,
     },
 
     couch: {
       body: couch,
       size: [65, 20],
       color: "black",
-      renderer: Wall,
+      renderer: Couch, 
     },
 
     tv: {
       body: tv,
       size: [20, 20],
       color: "black",
-      renderer: Wall,
+      renderer: TV,
     },
     top_wall: {
       body: top_wall,
