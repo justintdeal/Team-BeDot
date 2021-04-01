@@ -6,6 +6,7 @@ import React from "react";
 import { View, ImageBackground, StyleSheet } from "react-native";
 import MenuButton from "../components/MenuButton";
 import Background from "../assets/HomeBackground1.jpg";
+import {save, getValueFor} from "../DB";
 
 export default function Home({ navigation }) {
   //Nav Callbacks
@@ -13,9 +14,12 @@ export default function Home({ navigation }) {
     navigation.navigate("LevelOne");
   };
   const handleLevelSelect = () => {
+    save("test", "true")
     navigation.navigate("LevelSelect");
   };
-  const handleBadgeNav = () => {
+  async function handleBadgeNav () {
+
+    console.log(await getValueFor("test"))
     navigation.navigate("Badges");
   };
   const handleAboutNav = () => {

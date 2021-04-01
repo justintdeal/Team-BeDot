@@ -15,11 +15,11 @@ import GameStatusBar from "../components/GameStatusBar";
 import MenuButton from "../components/MenuButton";
 import SpeakButton from "../components/SpeakButton";
 import Movement from "../systems/Movement";
+import { save, getValueFor } from "../DB";
 
 export default class LevelOne extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       engineRunning: true,
       modalVisible: false,
@@ -37,9 +37,15 @@ export default class LevelOne extends Component {
       interactionModalVisible: false,
       note1ModalVisible: false,
       note2ModalVisible: false,
+      firstNoteBadgeModal: false,
     };
 
     this.gameEngine = null;
+  }
+
+  async componentDidMount() {
+    // let badgeEarned = await getValueFor("firstNote")
+    this.state.badgeEarned = await getValueFor("firstNote");
   }
 
   // This is a callback function that is passed as a
@@ -135,7 +141,7 @@ export default class LevelOne extends Component {
             animationType="slide"
             transparent={true}
             visible={this.state.interactionModalVisible}
-            supportedOrientations={['landscape']}
+            supportedOrientations={["landscape"]}
             onRequestClose={() => {
               this.setModalVisible(!modalVisible);
             }}
@@ -161,7 +167,7 @@ export default class LevelOne extends Component {
             animationType="slide"
             transparent={true}
             visible={this.state.levelComplete}
-            supportedOrientations={['landscape']}
+            supportedOrientations={["landscape"]}
             onRequestClosed={() => {
               this.setModalVisible(!modalVisible);
             }}
@@ -223,41 +229,45 @@ export default class LevelOne extends Component {
             animationType="slide"
             transparent={true}
             visible={this.state.note1ModalVisible}
-            supportedOrientations={['landscape']}
+            supportedOrientations={["landscape"]}
             onRequestClose={() => {
               this.setModalVisible(!modalVisible);
             }}
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
+                <Text style={styles.modalText}>Coins:</Text>
                 <Text style={styles.modalText}>
-                Coins:  
+                  Choose a toy chest without a lid. Toys should be large enough
+                  — at least 1¼" (3 centimeters) in diameter and 2¼" (6
+                  centimeters) in length — so that they can't be swallowed or
+                  lodged in the windpipe. Avoid marbles, coins, balls, and games
+                  with balls that are 1.75 inches (4.4 centimeters) in diameter
+                  or less because they can become lodged in the throat above the
+                  windpipe and cause trouble with breathing.
                 </Text>
                 <Text style={styles.modalText}>
-                  Choose a toy chest without a lid. 
-                  Toys should be large enough — at least 1¼" (3 centimeters) in diameter and 2¼" (6 centimeters) in length — so that they can't be swallowed or lodged in the windpipe. 
-                  Avoid marbles, coins, balls, and games with balls that are 1.75 inches (4.4 centimeters) in diameter or less because they can become lodged in the throat above the windpipe and cause trouble with breathing. 
-                  </Text>
-                  <Text style={styles.modalText}>
-                  Source: https://kidshealth.org/en/parents/products-toys.html 
+                  Source: https://kidshealth.org/en/parents/products-toys.html
                 </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
                 <MenuButton
                   text="OK"
                   onPress={() => {
                     this.setState({ note1ModalVisible: false });
-                    this.setState({ note1Collected: true});
+                    this.setState({ note1Collected: true });
+                    if (this.state.badgeEarned == null) {
+                      this.setState({ firstNoteBadgeModal: true });
+                    }
                   }}
                 ></MenuButton>
               </View>
             </View>
           </Modal>
-
           <Modal
             animationType="slide"
             transparent={true}
-            visible={this.state.note2ModalVisible}
-            supportedOrientations={['landscape']}
+            visible={this.state.firstNoteBadgeModal}
+            supportedOrientations={["landscape"]}
             onRequestClose={() => {
               this.setModalVisible(!modalVisible);
             }}
@@ -265,32 +275,64 @@ export default class LevelOne extends Component {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>
-                Outlets: 
+                  Congrats! You found your first Note. Go to the badges page to
+                  track your progress!
+                </Text>
+                <MenuButton
+                  text="OK"
+                  onPress={() => {
+                    this.setState({ firstNoteBadgeModal: false });
+                    save("firstNote", "true")
+                  }}
+                ></MenuButton>
+              </View>
+            </View>
+          </Modal>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.note2ModalVisible}
+            supportedOrientations={["landscape"]}
+            onRequestClose={() => {
+              this.setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Outlets:</Text>
+                <Text style={styles.modalText}>
+                  Outlet Covers are great solutions to prevent accidental
+                  electrocutions. Nearly one-third of accidents occur when a
+                  child inserts common household items into receptacles, 70
+                  percent of them occurring when adults are present.  Items that
+                  children insert into outlets can be found anywhere, and
+                  include:
                 </Text>
                 <Text style={styles.modalText}>
-                Outlet Covers are great solutions to prevent accidental electrocutions. Nearly one-third of accidents occur when a child inserts common household items into receptacles, 70 percent of them occurring when adults are present.  Items that children insert into outlets can be found anywhere, and include: 
+                  Hairpins, Keys, Plugs, Paper clips and staples, Tools,
+                  Jewelry, Belt buckles, Nail files, Knives
+                </Text>
+                <Text style={styles.modalText}>And more</Text>
+                <Text style={styles.modalText}>
+                  Approximately 100 kids die each year by electrocution, 2 and
+                  many others are seriously hurt.
                 </Text>
                 <Text style={styles.modalText}>
-                Hairpins, Keys, Plugs, Paper clips and staples, Tools, Jewelry, Belt buckles, Nail files, Knives 
+                  95 percent of injuries resulting from electrical outlets will
+                  involve burns. Though they range in severity, it is important
+                  to understand that burns are very serious in young children
+                  whose skin is thin and offers little resistance to electric
+                  flow or heat.
                 </Text>
                 <Text style={styles.modalText}>
-                And more 
-                </Text>
-                <Text style={styles.modalText}>
-                Approximately 100 kids die each year by electrocution, 2 and many others are seriously hurt. 
-                </Text>
-                <Text style={styles.modalText}>
-                95 percent of injuries resulting from electrical outlets will involve burns. Though they range in severity, it is important to understand that burns are very serious in young children whose skin is thin and offers little resistance to electric flow or heat. 
-                </Text>
-                <Text style={styles.modalText}>
-                Source: https://mrelectric.com/child-proof-outlets  
+                  Source: https://mrelectric.com/child-proof-outlets
                 </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
                 <MenuButton
                   text="OK"
                   onPress={() => {
                     this.setState({ note2ModalVisible: false });
-                    this.setState({ note2Collected: true});
+                    this.setState({ note2Collected: true });
                   }}
                 ></MenuButton>
               </View>
