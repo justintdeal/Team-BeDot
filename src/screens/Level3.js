@@ -8,6 +8,7 @@ import NoteButton from "../components/NoteButton";
 import GameStatusBar from "../components/GameStatusBar";
 import SpeakButton from "../components/SpeakButton";
 import MenuButton from "../components/MenuButton";
+import DogMove from "../systems/DogMove";
 
 export default class LevelThree extends Component {
   constructor(props) {
@@ -146,7 +147,7 @@ export default class LevelThree extends Component {
           }}
           style={styles.gameContainer}
           running={this.state.engineRunning}
-          systems={[Movement, Dispatches]}
+          systems={[Movement, Dispatches, DogMove]}
           onEvent={this.onEvent}
           entities={Entities()}
         ></GameEngine>

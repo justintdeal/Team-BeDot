@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
 
-export default class Npc extends Component {
+export default class Car extends Component {
   constructor(props) {
     super(props);
   }
@@ -22,7 +22,7 @@ export default class Npc extends Component {
           backgroundColor: this.props.backgroundColor,
           resizeMode: "stretch",
         }}
-        source={require("../../assets/npc.png")}
+        source={require("../../assets/yard/car.png")}
       />
     );
   }

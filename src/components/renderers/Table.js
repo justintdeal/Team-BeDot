@@ -20,7 +20,7 @@ export default class Table extends Component {
           width: width,
           height: height,
           backgroundColor: this.props.backgroundColor,
-          resizeMode: "contain",
+          resizeMode: "stretch",
         }}
         source={require("../../assets/living-room/table.png")}
       />

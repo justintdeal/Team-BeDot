@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from "react";
-import { StyleSheet, View, Modal, Text } from "react-native";
+import { StyleSheet, View, Modal, Text, ImageBackground } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Entities from "../entities/Level1Entities";
 import Dispatches from "../systems/Level1Dispatches";
@@ -15,6 +15,7 @@ import GameStatusBar from "../components/GameStatusBar";
 import MenuButton from "../components/MenuButton";
 import SpeakButton from "../components/SpeakButton";
 import Movement from "../systems/Movement";
+
 
 export default class LevelOne extends Component {
   constructor(props) {
@@ -129,6 +130,8 @@ export default class LevelOne extends Component {
   render() {
     const { modalVisible } = this.state;
     return (
+      // <ImageBackground source={Background}>
+
       <View style={styles.container}>
         <View style={styles.centeredView}>
           <Modal
@@ -304,6 +307,7 @@ export default class LevelOne extends Component {
           />
         </View>
       </View>
+      // </ImageBackground>
     );
   }
 }

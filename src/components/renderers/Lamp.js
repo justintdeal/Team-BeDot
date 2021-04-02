@@ -20,7 +20,7 @@ export default class lamp extends Component {
           width: width,
           height: height,
           backgroundColor: this.props.backgroundColor,
-          resizeMode: "contain",
+          resizeMode: "stretch",
         }}
         source={require("../../assets/living-room/lamp.png")}
       />

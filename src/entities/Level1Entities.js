@@ -2,7 +2,6 @@ import Matter from "matter-js";
 import Player from "../components/renderers/Player";
 import Wall from "../components/Wall";
 import Constants from "../Constants";
-import Circle from "../components/Circle";
 import Npc from "../components/renderers/Npc";
 import TV from "../components/renderers/TV";
 import Table from "../components/renderers/Table";
@@ -11,6 +10,10 @@ import SideTable from "../components/renderers/SideTable";
 import Stairs from "../components/renderers/Stairs"
 import Plant from "../components/renderers/Plant"
 import Bookshelf from "../components/renderers/Bookshelf"
+import SofaChair from "../components/renderers/SofaChair"
+import Lamp from "../components/renderers/Lamp"
+import Fireplace from "../components/renderers/Fireplace"
+import Rug from "../components/renderers/Rug"
 
 const Entities = () => {
   let engine = Matter.Engine.create({ enableSleeping: false });
@@ -46,20 +49,20 @@ const Entities = () => {
     75,
     { isStatic: true }
   );
-  let stove = Matter.Bodies.rectangle(
+  let fireplace = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.3,
     Constants.MAX_HEIGHT * 0.95,
     75,
     50,
     { isStatic: true }
   );
-  let desk = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH * 0.5,
-    Constants.MAX_HEIGHT * 0.95,
-    75,
-    80,
-    { isStatic: true }
-  );
+  // let desk = Matter.Bodies.rectangle(
+  //   Constants.MAX_WIDTH * 0.5,
+  //   Constants.MAX_HEIGHT * 0.95,
+  //   75,
+  //   80,
+  //   { isStatic: true }
+  // );
   let chair = Matter.Bodies.rectangle(
     (x = Constants.MAX_WIDTH * 0.85),
     (y = Constants.MAX_HEIGHT / 2),
@@ -68,7 +71,7 @@ const Entities = () => {
     { isStatic: true }
   );
 
-  let cir_table = Matter.Bodies.circle(
+  let rug = Matter.Bodies.circle(
     (x = Constants.MAX_WIDTH * 0.8),
     (y = Constants.MAX_HEIGHT * 0.3),
     (radius = 40),
@@ -157,10 +160,10 @@ const Entities = () => {
     npc,
     plant,
     stairs,
-    stove,
-    desk,
+    fireplace,
+    // desk,
     chair,
-    cir_table,
+    rug,
     bookshelf,
     lamp,
     sideTable,
@@ -188,29 +191,29 @@ const Entities = () => {
       color: "black",
       renderer: Stairs,
     },
-    stove: {
-      body: stove,
+    fireplace: {
+      body: fireplace,
       size: [75, 50],
       color: "black",
-      renderer: Wall,
+      renderer: Fireplace,
     },
-    desk: {
-      body: desk,
-      size: [75, 80],
-      color: "black",
-      renderer: Wall,
-    },
+    // desk: {
+    //   body: desk,
+    //   size: [75, 80],
+    //   color: "black",
+    //   renderer: Wall,
+    // },
     chair: {
       body: chair,
       size: [30, 30],
       color: "black",
-      renderer: Wall,
+      renderer: SofaChair,
     },
-    cir_table: {
-      body: cir_table,
+    rug: {
+      body: rug,
       color: "black",
       radius: 38,
-      renderer: Circle,
+      renderer: Rug,
     },
     bookshelf: {
       body: bookshelf,
@@ -222,7 +225,7 @@ const Entities = () => {
       body: lamp,
       color: "black",
       size: [20, 20],
-      renderer: Wall,
+      renderer: Lamp,
     },
     sideTable: {
       body: sideTable,
