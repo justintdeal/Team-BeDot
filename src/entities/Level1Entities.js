@@ -21,39 +21,39 @@ const Entities = () => {
   world.gravity.y = 0;
 
   let player = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH / 8,
+    Constants.MAX_WIDTH / 12,
     Constants.MAX_HEIGHT / 2,
-    45,
-    45
+    90,
+    90
   );
 
   let npc = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 3,
     Constants.MAX_HEIGHT / 6,
-    45,
-    45,
+    90,
+    90,
     { isStatic: true }
   );
 
   let plant = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.6,
-    Constants.MAX_HEIGHT / 6,
-    45,
-    45,
+    Constants.MAX_HEIGHT / 3,
+    95,
+    95,
     { isStatic: true }
   );
   let stairs = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.5,
-    Constants.MAX_HEIGHT / 6,
-    55,
-    75,
+    Constants.MAX_HEIGHT / 4,
+    150,
+    170,
     { isStatic: true }
   );
   let fireplace = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.3,
     Constants.MAX_HEIGHT * 0.95,
-    75,
-    50,
+    130,
+    130,
     { isStatic: true }
   );
   // let desk = Matter.Bodies.rectangle(
@@ -74,7 +74,7 @@ const Entities = () => {
   let rug = Matter.Bodies.circle(
     (x = Constants.MAX_WIDTH * 0.8),
     (y = Constants.MAX_HEIGHT * 0.3),
-    (radius = 40),
+    (radius = 75),
     { isStatic: true }
   );
 
@@ -89,13 +89,13 @@ const Entities = () => {
   let lamp = Matter.Bodies.rectangle(
     (x = Constants.MAX_WIDTH * 0.92),
     (y = Constants.MAX_HEIGHT * 0.2),
-    (width = 20),
+    (width = 40),
     (height = 20),
     { isStatic: true }
   );
   let sideTable = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH / 15,
-    Constants.MAX_HEIGHT / 7,
+    Constants.MAX_WIDTH / 10,
+    Constants.MAX_HEIGHT / 15,
     20,
     20,
     { isStatic: true }
@@ -104,24 +104,24 @@ const Entities = () => {
   let couch = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 8,
     Constants.MAX_HEIGHT / 7,
-    65,
-    20,
+    130,
+    95,
     { isStatic: true }
   );
 
   let coffeeTable = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 8,
-    Constants.MAX_HEIGHT / 4,
-    45,
-    25,
+    Constants.MAX_HEIGHT / 3,
+    120,
+    120,
     { isStatic: true }
   );
 
   let tv = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 8,
     Constants.MAX_HEIGHT / 3,
-    20,
-    20,
+    60,
+    60,
     { isStatic: true }
   );
 
@@ -177,23 +177,33 @@ const Entities = () => {
 
   return {
     physics: { engine: engine, world: world },
-    player: { body: player, size: [45, 45], backgroundColor:"#E6D2BA", renderer: Player },
-    npc: { body: npc, size: [45, 45], backgroundColor: "#E6D2BA", renderer: Npc },
+    player: { 
+      body: player, 
+      size: [90, 90], 
+      backgroundColor:"#E6D2BA", 
+      renderer: Player 
+    },
+    npc: { 
+      body: npc, 
+      size: [90, 90], 
+      backgroundColor: "#E6D2BA", 
+      renderer: Npc 
+    },
     plant: {
       body: plant,
-      size: [45, 45],
+      size: [95, 95],
       color: "black",
       renderer: Plant,
     },
     stairs: {
       body: stairs,
-      size: [55, 75],
+      size: [150, 170],
       color: "black",
       renderer: Stairs,
     },
     fireplace: {
       body: fireplace,
-      size: [75, 50],
+      size: [130, 130],
       color: "black",
       renderer: Fireplace,
     },
@@ -212,7 +222,7 @@ const Entities = () => {
     rug: {
       body: rug,
       color: "black",
-      radius: 38,
+      radius: 75,
       renderer: Rug,
     },
     bookshelf: {
@@ -224,7 +234,7 @@ const Entities = () => {
     lamp: {
       body: lamp,
       color: "black",
-      size: [20, 20],
+      size: [25, 75],
       renderer: Lamp,
     },
     sideTable: {
@@ -236,21 +246,21 @@ const Entities = () => {
 
     coffeeTable: {
       body: coffeeTable,
-      size: [45, 25],
+      size: [120, 120],
       color: "black",
       renderer: Table,
     },
 
     couch: {
       body: couch,
-      size: [65, 20],
+      size: [130, 95],
       color: "black",
       renderer: Couch, 
     },
 
     tv: {
       body: tv,
-      size: [20, 20],
+      size: [60, 60],
       color: "black",
       renderer: TV,
     },
