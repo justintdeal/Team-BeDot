@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
 
-export default class Baby extends Component {
+export default class Sink extends Component {
   constructor(props) {
     super(props);
   }
@@ -19,10 +19,10 @@ export default class Baby extends Component {
           top: y,
           width: width,
           height: height,
-          backgroundColor: "#232b2b",
+          backgroundColor: this.props.backgroundColor,
           resizeMode: "stretch",
         }}
-        source={require("../../assets/baby.png")}
+        source={require("../../assets/kitchen/sink.png")}
       />
     );
   }

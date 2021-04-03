@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
 
-export default class coffee extends Component {
+export default class Counter3 extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const width = 30;
-    const height = 30;
+    const width = this.props.size[0];
+    const height = this.props.size[1];
     const x = this.props.body.position.x - width / 2;
     const y = this.props.body.position.y - height / 2;
 
@@ -19,10 +19,10 @@ export default class coffee extends Component {
           top: y,
           width: width,
           height: height,
-          backgroundColor: "#232b2b",
+        //   backgroundColor: this.props.backgroundColor,
           resizeMode: "stretch",
         }}
-        source={require("../../assets/coffee.png")}
+        source={require("../../assets/kitchen/counter-3.png")}
       />
     );
   }

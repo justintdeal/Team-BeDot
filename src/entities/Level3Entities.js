@@ -15,39 +15,39 @@ const Entities = () => {
   let player = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 2,
     Constants.MAX_HEIGHT / 6,
-    45,
-    45
+    90,
+    90
   );
 
   let npc = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 10,
     Constants.MAX_HEIGHT / 6,
-    45,
-    45,
+    90,
+    90,
     { isStatic: true }
   );
 
   let pool = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 3,
     Constants.MAX_HEIGHT * 0.66,
-    500,
-    200,
+    400,
+    300,
     { isStatic: true }
   );
 
   let car = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.85,
     Constants.MAX_HEIGHT * 0.46,
-    90,
-    150,
+    200,
+    200,
     { isStatic: true }
   );
   
   let dog = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.75,
     Constants.MAX_HEIGHT * 0.86,
-    30,
-    30,
+    70,
+    70,
   );
   let top_wall = Matter.Bodies.rectangle(
     (x = 0),
@@ -79,23 +79,23 @@ const Entities = () => {
 
   return {
     physics: { engine: engine, world: world },
-    player: { body: player, size: [45, 45], backgroundColor:"#DBD7D2", renderer: Player },
-    npc: { body: npc, size: [45, 45], backgroundColor: "#DBD7D2", renderer: Npc },
+    player: { body: player, size: [90, 90], backgroundColor:"#DBD7D2", renderer: Player },
+    npc: { body: npc, size: [90, 90], backgroundColor: "#DBD7D2", renderer: Npc },
     pool: {
       body: pool,
-      size: [500, 300],
+      size: [400, 300],
       color: "black",
       renderer: Pool,
     },
     car: {
       body: car,
-      size: [90, 150],
+      size: [200, 200],
       color: "black",
       renderer: Car,
     },
     dog: {
       body: dog,
-      size: [30, 30],
+      size: [70, 70],
       color: "black",
       renderer: Dog,
     },

@@ -21,6 +21,7 @@ export default class Fireplace extends Component {
           height: height,
           backgroundColor: this.props.backgroundColor,
           resizeMode: "stretch",
+
         }}
         source={require("../../assets/living-room/fireplace.png")}
       />
