@@ -2,8 +2,10 @@ import Matter from "matter-js";
 import Player from "../components/renderers/Player";
 import Wall from "../components/Wall";
 import Constants from "../Constants";
-import Circle from "../components/Circle";
 import Npc from "../components/renderers/Npc";
+import Car from "../components/renderers/Car";
+import Dog from "../components/renderers/Dog";
+import Pool from "../components/renderers/Pool";
 
 const Entities = () => {
   let engine = Matter.Engine.create({ enableSleeping: false });
@@ -46,15 +48,33 @@ const Entities = () => {
     Constants.MAX_HEIGHT * 0.86,
     30,
     30,
+  );
+  let top_wall = Matter.Bodies.rectangle(
+    (x = 0),
+    (y = 0),
+    (width = Constants.MAX_WIDTH * 2),
+    (height = Constants.MAX_HEIGHT / 6),
+
     { isStatic: true }
   );
-
+  
+  let dog = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.75,
+    Constants.MAX_HEIGHT * 0.86,
+    30,
+    30,
+    { isStatic: true }
+  );
   Matter.World.add(world, [
     player,
     npc,
     pool,
     car,
     dog,
+    top_wall,
+    left_wall,
+    right_wall,
+    bottom_wall
   ]);
 
   return {
@@ -63,19 +83,43 @@ const Entities = () => {
     npc: { body: npc, size: [45, 45], backgroundColor: "#DBD7D2", renderer: Npc },
     pool: {
       body: pool,
-      size: [500, 200],
+      size: [500, 300],
       color: "black",
-      renderer: Wall,
+      renderer: Pool,
     },
     car: {
       body: car,
       size: [90, 150],
       color: "black",
-      renderer: Wall,
+      renderer: Car,
     },
     dog: {
       body: dog,
       size: [30, 30],
+      color: "black",
+      renderer: Dog,
+    },
+    top_wall: {
+      body: top_wall,
+      size: [Constants.MAX_WIDTH * 2, Constants.MAX_HEIGHT / 6],
+      color: "black",
+      renderer: Wall,
+    },
+    left_wall: {
+      body: left_wall,
+      size: [10, Constants.MAX_HEIGHT * 2],
+      color: "black",
+      renderer: Wall,
+    },
+    right_wall: {
+      body: right_wall,
+      size: [10, Constants.MAX_HEIGHT * 2],
+      color: "black",
+      renderer: Wall,
+    },
+    bottom_wall: {
+      body: bottom_wall,
+      size: [Constants.MAX_WIDTH, 10],
       color: "black",
       renderer: Wall,
     },

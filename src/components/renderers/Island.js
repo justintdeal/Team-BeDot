@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
 
-export default class Npc extends Component {
+export default class Island extends Component {
   constructor(props) {
     super(props);
   }
@@ -19,10 +19,10 @@ export default class Npc extends Component {
           top: y,
           width: width,
           height: height,
-          backgroundColor: this.props.backgroundColor,
+        //   backgroundColor: this.props.backgroundColor,
           resizeMode: "stretch",
         }}
-        source={require("../../assets/npc.png")}
+        source={require("../../assets/kitchen/island.png")}
       />
     );
   }

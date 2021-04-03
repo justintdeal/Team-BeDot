@@ -4,6 +4,8 @@ import Constants from "../Constants";
 import Circle from "../components/Circle";
 import Player from "../components/renderers/Player";
 import Npc from "../components/renderers/Npc";
+import DiningTable from "../components/renderers/DiningTable"
+import Island from "../components/renderers/Island";
 
 const Entities = () => {
   let engine = Matter.Engine.create({ enableSleeping: false });
@@ -128,8 +130,8 @@ const Entities = () => {
     diningTable: {
       body: diningTable,
       size: [80, 65],
-      color: "black",
-      renderer: Wall,
+      // color: "black",
+      renderer: DiningTable,
     },
     chairOne: {
       body: chairOne,
@@ -153,7 +155,7 @@ const Entities = () => {
       body: island,
       size: [150, 90],
       color: "black",
-      renderer: Wall,
+      renderer: Island,
     },
     topCabinet: {
       body: topCabinet,

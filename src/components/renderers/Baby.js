@@ -20,7 +20,7 @@ export default class Baby extends Component {
           width: width,
           height: height,
           backgroundColor: "#232b2b",
-          resizeMode: "contain",
+          resizeMode: "stretch",
         }}
         source={require("../../assets/baby.png")}
       />
