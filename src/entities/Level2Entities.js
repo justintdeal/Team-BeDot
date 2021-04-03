@@ -10,7 +10,8 @@ import Refrigerator from "../components/renderers/Refrigerator";
 import Counter1 from "../components/renderers/Counter1";
 import Counter2 from "../components/renderers/Counter2";
 import Counter3 from "../components/renderers/Counter3";
-
+import Stove from "../components/renderers/Stove";
+import Sink from "../components/renderers/Sink";
 
 const Entities = () => {
   let engine = Matter.Engine.create({ enableSleeping: false });
@@ -20,47 +21,63 @@ const Entities = () => {
   let player = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 8,
     Constants.MAX_HEIGHT / 2,
-    90,
-    90
+    120,
+    120
   );
 
   let npc = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.5,
     Constants.MAX_HEIGHT * 0.66,
-    90,
-    90,
+    120,
+    120,
     { isStatic: true }
   );
 
   let diningTable = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 7,
     Constants.MAX_HEIGHT / 3,
-    130,
-    130,
+    150,
+    150,
     { isStatic: true }
   );
 
   let counter1 = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH * 0.665,
-    Constants.MAX_HEIGHT * 0.22,
-    100,
-    100,
+    Constants.MAX_WIDTH * 0.625,
+    Constants.MAX_HEIGHT * 0.27,
+    120,
+    120,
     { isStatic: true }
   );
 
   let counter2 = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH * 0.715,
-    Constants.MAX_HEIGHT * 0.22,
-    100,
-    100,
+    Constants.MAX_WIDTH * 0.82,
+    Constants.MAX_HEIGHT * 0.27,
+    120,
+    120,
     { isStatic: true }
   );
 
   let counter3 = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH * 0.765,
-    Constants.MAX_HEIGHT * 0.22,
-    100,
-    100,
+    Constants.MAX_WIDTH * 0.69,
+    Constants.MAX_HEIGHT * 0.27,
+    120,
+    120,
+    { isStatic: true }
+  );
+
+  let stove = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.835,
+    Constants.MAX_HEIGHT * 0.35,
+    105,
+    105,
+    { isStatic: true }
+  );
+
+  let sink = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.755,
+    Constants.MAX_HEIGHT * 0.27,
+    120,
+    120,
     { isStatic: true }
   );
   // let chairOne = Matter.Bodies.circle(
@@ -88,15 +105,15 @@ const Entities = () => {
   let island = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.65,
     Constants.MAX_HEIGHT * 0.66,
-    150,
-    90,
+    140,
+    140,
     { isStatic: true }
   );
   let refrigerator = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH * 0.6,
-    Constants.MAX_HEIGHT * 0.2,
-    100,
-    100,
+    Constants.MAX_WIDTH * 0.55,
+    Constants.MAX_HEIGHT * 0.25,
+    120,
+    120,
     { isStatic: true }
   );
   // let topCabinet = Matter.Bodies.rectangle(
@@ -159,18 +176,20 @@ const Entities = () => {
     counter2,
     counter3,
     island,
+    stove,
+    sink,
     // topCabinet,
     // rightCabinet,
   ]);
 
   return {
     physics: { engine: engine, world: world },
-    player: { body: player, size: [90, 90], backgroundColor:"#DBD7D2", renderer: Player },
-    npc: { body: npc, size: [90, 90], backgroundColor: "#DBD7D2", renderer: Npc },
+    player: { body: player, size: [120, 120], backgroundColor:"#DBD7D2", renderer: Player },
+    npc: { body: npc, size: [120, 120], backgroundColor: "#DBD7D2", renderer: Npc },
     
     diningTable: {
       body: diningTable,
-      size: [130, 130],
+      size: [150, 150],
       // color: "black",
       renderer: DiningTable,
     },
@@ -194,35 +213,46 @@ const Entities = () => {
     // },
     island: {
       body: island,
-      size: [150, 150],
+      size: [140, 140],
       color: "black",
       renderer: Island,
     },
     refrigerator: {
       body: refrigerator,
-      size: [100, 100],
+      size: [120, 120],
       color: "black",
       renderer: Refrigerator,
     },
     counter1: {
       body: counter1,
-      size: [100, 100],
+      size: [120, 120],
       color: "black",
       renderer: Counter1,
     },
     counter2: {
       body: counter2,
-      size: [100, 100],
+      size: [120, 120],
       color: "black",
       renderer: Counter2,
     },
     counter3: {
       body: counter3,
-      size: [100, 100],
+      size: [120, 120],
       color: "black",
       renderer: Counter3,
     },
-
+    sink: {
+      body: sink,
+      size: [120, 120],
+      color: "black",
+      renderer: Sink,
+    },
+    stove: {
+      body: stove,
+      size: [105, 105],
+      color: "black",
+      renderer: Stove,
+    },
     // topCabinet: {
     //   body: topCabinet,
     //   size: [650, 52],

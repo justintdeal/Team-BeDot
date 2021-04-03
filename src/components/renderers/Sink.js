@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
 
-export default class Stove extends Component {
+export default class Sink extends Component {
   constructor(props) {
     super(props);
   }
@@ -22,7 +22,7 @@ export default class Stove extends Component {
           backgroundColor: this.props.backgroundColor,
           resizeMode: "stretch",
         }}
-        source={require("../../assets/kitchen/stove.png")}
+        source={require("../../assets/kitchen/sink.png")}
       />
     );
   }
