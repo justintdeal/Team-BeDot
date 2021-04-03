@@ -57,12 +57,25 @@ const Entities = () => {
 
     { isStatic: true }
   );
-  
-  let dog = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH * 0.75,
-    Constants.MAX_HEIGHT * 0.86,
-    30,
-    30,
+  let left_wall = Matter.Bodies.rectangle(
+    (x = 0),
+    (y = 0),
+    (width = 10),
+    (height = Constants.MAX_HEIGHT * 2),
+    { isStatic: true }
+  );
+  let right_wall = Matter.Bodies.rectangle(
+    (x = Constants.MAX_WIDTH),
+    (y = 0),
+    (width = 10),
+    (height = Constants.MAX_HEIGHT * 2),
+    { isStatic: true }
+  );
+  let bottom_wall = Matter.Bodies.rectangle(
+    (x = Constants.MAX_WIDTH / 2),
+    (y = Constants.MAX_HEIGHT),
+    (width = Constants.MAX_WIDTH),
+    (height = 10),
     { isStatic: true }
   );
   Matter.World.add(world, [
