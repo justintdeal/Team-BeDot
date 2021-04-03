@@ -6,6 +6,11 @@ import Player from "../components/renderers/Player";
 import Npc from "../components/renderers/Npc";
 import DiningTable from "../components/renderers/DiningTable"
 import Island from "../components/renderers/Island";
+import Refrigerator from "../components/renderers/Refrigerator";
+import Counter1 from "../components/renderers/Counter1";
+import Counter2 from "../components/renderers/Counter2";
+import Counter3 from "../components/renderers/Counter3";
+
 
 const Entities = () => {
   let engine = Matter.Engine.create({ enableSleeping: false });
@@ -15,46 +20,71 @@ const Entities = () => {
   let player = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 8,
     Constants.MAX_HEIGHT / 2,
-    45,
-    45
+    90,
+    90
   );
 
   let npc = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.5,
     Constants.MAX_HEIGHT * 0.66,
-    45,
-    45,
+    90,
+    90,
     { isStatic: true }
   );
 
   let diningTable = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 7,
     Constants.MAX_HEIGHT / 3,
-    80,
-    65,
+    130,
+    130,
     { isStatic: true }
   );
 
-  let chairOne = Matter.Bodies.circle(
-    (x = Constants.MAX_WIDTH / 4.5),
-    (y = Constants.MAX_HEIGHT / 3.3),
-    (radius = 20),
+  let counter1 = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.665,
+    Constants.MAX_HEIGHT * 0.22,
+    100,
+    100,
     { isStatic: true }
   );
 
-  let chairTwo = Matter.Bodies.circle(
-    (x = Constants.MAX_WIDTH * 0.04),
-    (y = Constants.MAX_HEIGHT / 3.3),
-    (radius = 20),
+  let counter2 = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.715,
+    Constants.MAX_HEIGHT * 0.22,
+    100,
+    100,
     { isStatic: true }
   );
-  let knife = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH / 2.5,
-    Constants.MAX_HEIGHT / 6,
-    45,
-    45,
+
+  let counter3 = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.765,
+    Constants.MAX_HEIGHT * 0.22,
+    100,
+    100,
     { isStatic: true }
   );
+  // let chairOne = Matter.Bodies.circle(
+  //   (x = Constants.MAX_WIDTH / 4.5),
+  //   (y = Constants.MAX_HEIGHT / 3.3),
+  //   (radius = 20),
+  //   { isStatic: true }
+  // );
+
+  // let chairTwo = Matter.Bodies.circle(
+  //   (x = Constants.MAX_WIDTH * 0.04),
+  //   (y = Constants.MAX_HEIGHT / 3.3),
+  //   (radius = 20),
+  //   { isStatic: true }
+  // );
+
+  // let knife = Matter.Bodies.rectangle(
+  //   Constants.MAX_WIDTH / 2.5,
+  //   Constants.MAX_HEIGHT / 6,
+  //   45,
+  //   45,
+  //   { isStatic: true }
+  // );
+
   let island = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.65,
     Constants.MAX_HEIGHT * 0.66,
@@ -62,20 +92,27 @@ const Entities = () => {
     90,
     { isStatic: true }
   );
-  let topCabinet = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH * 0.9,
-    Constants.MAX_HEIGHT * 0.15,
-    650,
-    52,
+  let refrigerator = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.6,
+    Constants.MAX_HEIGHT * 0.2,
+    100,
+    100,
     { isStatic: true }
   );
-  let rightCabinet = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH * 0.84,
-    Constants.MAX_HEIGHT * 0.25,
-    52,
-    300,
-    { isStatic: true }
-  );
+  // let topCabinet = Matter.Bodies.rectangle(
+  //   Constants.MAX_WIDTH * 0.9,
+  //   Constants.MAX_HEIGHT * 0.15,
+  //   650,
+  //   52,
+  //   { isStatic: true }
+  // );
+  // let rightCabinet = Matter.Bodies.rectangle(
+  //   Constants.MAX_WIDTH * 0.84,
+  //   Constants.MAX_HEIGHT * 0.25,
+  //   52,
+  //   300,
+  //   { isStatic: true }
+  // );
 
   let top_wall = Matter.Bodies.rectangle(
     (x = 0),
@@ -114,61 +151,90 @@ const Entities = () => {
     right_wall,
     bottom_wall,
     diningTable,
-    chairOne,
-    chairTwo,
-    knife,
+    // chairOne,
+    // chairTwo,
+   //knife,
+    refrigerator,
+    counter1,
+    counter2,
+    counter3,
     island,
-    topCabinet,
-    rightCabinet,
+    // topCabinet,
+    // rightCabinet,
   ]);
 
   return {
     physics: { engine: engine, world: world },
-    player: { body: player, size: [45, 45], backgroundColor:"#DBD7D2", renderer: Player },
-    npc: { body: npc, size: [45, 45], backgroundColor: "#DBD7D2", renderer: Npc },
+    player: { body: player, size: [90, 90], backgroundColor:"#DBD7D2", renderer: Player },
+    npc: { body: npc, size: [90, 90], backgroundColor: "#DBD7D2", renderer: Npc },
     
     diningTable: {
       body: diningTable,
-      size: [80, 65],
+      size: [130, 130],
       // color: "black",
       renderer: DiningTable,
     },
-    chairOne: {
-      body: chairOne,
-      color: "black",
-      radius: 20,
-      renderer: Circle,
-    },
-    chairTwo: {
-      body: chairTwo,
-      color: "black",
-      radius: 20,
-      renderer: Circle,
-    },
-    knife: {
-      body: knife,
-      size: [25, 25],
-      color: "black",
-      renderer: Wall,
-    },
+    // chairOne: {
+    //   body: chairOne,
+    //   color: "black",
+    //   radius: 20,
+    //   renderer: Circle,
+    // },
+    // chairTwo: {
+    //   body: chairTwo,
+    //   color: "black",
+    //   radius: 20,
+    //   renderer: Circle,
+    // },
+    // knife: {
+    //   body: knife,
+    //   size: [25, 25],
+    //   color: "black",
+    //   renderer: Wall,
+    // },
     island: {
       body: island,
-      size: [150, 90],
+      size: [150, 150],
       color: "black",
       renderer: Island,
     },
-    topCabinet: {
-      body: topCabinet,
-      size: [650, 52],
+    refrigerator: {
+      body: refrigerator,
+      size: [100, 100],
       color: "black",
-      renderer: Wall,
+      renderer: Refrigerator,
     },
-    rightCabinet: {
-      body: rightCabinet,
-      size: [52, 300],
+    counter1: {
+      body: counter1,
+      size: [100, 100],
       color: "black",
-      renderer: Wall,
+      renderer: Counter1,
     },
+    counter2: {
+      body: counter2,
+      size: [100, 100],
+      color: "black",
+      renderer: Counter2,
+    },
+    counter3: {
+      body: counter3,
+      size: [100, 100],
+      color: "black",
+      renderer: Counter3,
+    },
+
+    // topCabinet: {
+    //   body: topCabinet,
+    //   size: [650, 52],
+    //   color: "black",
+    //   renderer: Wall,
+    // },
+    // rightCabinet: {
+    //   body: rightCabinet,
+    //   size: [52, 300],
+    //   color: "black",
+    //   renderer: Wall,
+    // },
     top_wall: {
       body: top_wall,
       size: [Constants.MAX_WIDTH * 2, Constants.MAX_HEIGHT / 6],

@@ -94,10 +94,10 @@ const Entities = () => {
     { isStatic: true }
   );
   let sideTable = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH / 10,
-    Constants.MAX_HEIGHT / 15,
-    20,
-    20,
+    Constants.MAX_WIDTH / 4 ,
+    Constants.MAX_HEIGHT / 7 + 30,
+    45,
+    45,
     { isStatic: true }
   );
 
@@ -119,7 +119,7 @@ const Entities = () => {
 
   let tv = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 8,
-    Constants.MAX_HEIGHT / 3,
+    Constants.MAX_HEIGHT / 3 + 50,
     60,
     60,
     { isStatic: true }
@@ -240,7 +240,7 @@ const Entities = () => {
     },
     sideTable: {
       body: sideTable,
-      size: [20, 20],
+      size: [45, 45],
       color: "black",
       renderer: SideTable,
     },
@@ -261,7 +261,7 @@ const Entities = () => {
 
     tv: {
       body: tv,
-      size: [60, 60],
+      size: [70, 70],
       color: "black",
       renderer: TV,
     },
