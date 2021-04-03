@@ -124,6 +124,7 @@ const Entities = () => {
     60,
     { isStatic: true }
   );
+  
 
   let top_wall = Matter.Bodies.rectangle(
     (x = 0),
