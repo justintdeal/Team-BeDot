@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import Background from "../assets/homebkg.png";
+import Background from "../assets/badgeScreen.png";
 import Constants from "../Constants";
 import MenuButton from "../components/MenuButton";
 import { get } from "../Db"

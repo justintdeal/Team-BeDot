@@ -5,7 +5,7 @@
 import React from "react";
 import { View, ImageBackground, StyleSheet } from "react-native";
 import MenuButton from "../components/MenuButton";
-import Background from "../assets/homebkg.png";
+import Background from "../assets/orangeHomescreen.png";
 
 export default function Home({ navigation }) {
   //Nav Callbacks
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+    top: 55,
     justifyContent: "center",
   },
   button: {

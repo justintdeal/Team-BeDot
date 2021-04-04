@@ -3,9 +3,9 @@
  */
 
 import React from "react";
-import { ImageBackground, StyleSheet } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import MenuButton from "../components/MenuButton";
-import Background from "../assets/homebkg.png";
+import Background from "../assets/levelSelect.png";
 
 export default function LevelSelect({ navigation }) {
 
@@ -25,10 +25,12 @@ export default function LevelSelect({ navigation }) {
 
   return (
     <ImageBackground source={Background} style={styles.image}>
+      <View style={styles.buttonContainer}>
       <MenuButton text="LIVING ROOM" onPress={launchLevelOne} txtColor={"white"}></MenuButton>
       <MenuButton text="KITCHEN" onPress={launchLevelTwo} txtColor={"white"}></MenuButton>
       <MenuButton text="BACKYARD" onPress={launchLevelThree} txtColor={"white"}></MenuButton>
       <MenuButton text="GO BACK" on onPress={goHome} txtColor={"white"}></MenuButton>
+      </View>
     </ImageBackground>
   );
 }
@@ -39,4 +41,9 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
   },
+  buttonContainer: {
+    flex: 1,
+    top: 35,
+    justifyContent: "center",
+  }
 });
