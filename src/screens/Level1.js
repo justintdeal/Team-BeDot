@@ -170,7 +170,7 @@ export default class LevelOne extends Component {
     return (
 
       <View style={styles.container}>
-              <ImageBackground source={Background} style={styles.image}>
+             {/* <ImageBackground source={Background} style={styles.image}> */}
 
         <View style={styles.centeredView}>
           <Modal
@@ -384,7 +384,7 @@ export default class LevelOne extends Component {
             onPress={this.handleNPCInteraction}
           />
         </View>
-        </ImageBackground>
+        {/* </ImageBackground> */}
       </View>
     );
   }
