@@ -28,10 +28,10 @@ const Entities = () => {
   );
 
   let npc = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH / 3,
+    Constants.MAX_WIDTH / 3 + 25,
     Constants.MAX_HEIGHT / 6,
-    90,
-    90,
+    40,
+    70,
     { isStatic: true }
   );
 
@@ -53,7 +53,7 @@ const Entities = () => {
     Constants.MAX_WIDTH * 0.3,
     Constants.MAX_HEIGHT * 0.95,
     130,
-    130,
+    40,
     { isStatic: true }
   );
   // let desk = Matter.Bodies.rectangle(
@@ -96,8 +96,8 @@ const Entities = () => {
   let sideTable = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 4 ,
     Constants.MAX_HEIGHT / 7 + 30,
-    45,
-    45,
+    10,
+    10,
     { isStatic: true }
   );
 
@@ -112,16 +112,16 @@ const Entities = () => {
   let coffeeTable = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 8,
     Constants.MAX_HEIGHT / 3,
-    120,
-    120,
+    100,
+    35,
     { isStatic: true }
   );
 
   let tv = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 8,
     Constants.MAX_HEIGHT / 3 + 50,
-    60,
-    60,
+    25,
+    25,
     { isStatic: true }
   );
   
@@ -181,13 +181,13 @@ const Entities = () => {
     player: { 
       body: player, 
       size: [90, 90], 
-      backgroundColor:"#E6D2BA", 
+      //backgroundColor: "#E6D2BA", 
       renderer: Player 
     },
     npc: { 
       body: npc, 
       size: [90, 90], 
-      backgroundColor: "#E6D2BA", 
+      //backgroundColor: "#E6D2BA", 
       renderer: Npc 
     },
     plant: {
@@ -254,7 +254,7 @@ const Entities = () => {
 
     couch: {
       body: couch,
-      size: [130, 95],
+      size: [130, 130],
       color: "black",
       renderer: Couch, 
     },
