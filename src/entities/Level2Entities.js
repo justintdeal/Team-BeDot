@@ -66,7 +66,7 @@ const Entities = () => {
     { isStatic: true }
   );
 
-  let counter3 = Matter.Bodies.rectangle(
+  let counter4 = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.835,
     Constants.MAX_HEIGHT * 0.42,
     120,
@@ -194,8 +194,12 @@ const Entities = () => {
 
   return {
     physics: { engine: engine, world: world },
-    player: { body: player, size: [120, 120], backgroundColor:"#DBD7D2", renderer: Player },
-    npc: { body: npc, size: [120, 120], backgroundColor: "#DBD7D2", renderer: Npc },
+    player: { body: player, size: [120, 120],
+      //backgroundColor:"#DBD7D2",
+      renderer: Player },
+    npc: { body: npc, size: [120, 120], 
+      //backgroundColor: "#DBD7D2",
+      renderer: Npc },
     
     diningTable: {
       body: diningTable,
