@@ -18,14 +18,19 @@ export default class LevelThree extends Component {
       engineRunning: true,
       modalVisible: false,
       levelComplete: false,
-      collectNoteVisible: false,
+      collectNote1Visible: false,
+      collectNote2Visible: false,
       inventorySize: 0,
       inventoryCap: 2,
       min: "00",
       sec: "00",
       msec: "00",
+      note1Collected: false,
+      note2Collected: false,
       interactionIconVisible: false,
       interactionModalVisible: false,
+      note1ModalVisible: false,
+      note2ModalVisible: false,
     };
 
     this.gameEngine = null;
@@ -45,31 +50,46 @@ export default class LevelThree extends Component {
     this.props.navigation.replace("Home");
   };
 
-  handleCollectNote = () => {
+  handleCollectNote1 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
+    this.setState({ note1ModalVisible: true });
   };
+
+  // callback that is called when the user hits the Note Button
+  // updates the inventory by one
+  handleCollectNote2 = () => {
+    this.setState({ inventorySize: this.state.inventorySize + 1 });
+    this.setState({ note2ModalVisible: true });
+  }
 
   handleLevelComplete = () => {
     this.setState({ levelComplete: true });
   };
+
   getTime = (time) => {
     this.setState({ min: time.min });
     this.setState({ sec: time.sec });
     this.setState({ msec: time.msec });
   };
+
   handleNPCInteraction = () => {
     this.setState({ interactionModalVisible: true });
   };
 
   onEvent = (e) => {
-    if (e.type === "note-one-found" || e.type === "note-two-found") {
-      this.setState({ collectNoteVisible: true });
+    if (e.type === "note-one-found" && this.state.note1Collected == false) {
+      this.setState({ collectNote1Visible: true });
+    }
+    if (e.type === "note-two-found" && this.state.note2Collected == false) {
+      this.setState({ collectNote2Visible: true });
     }
     if (e.type === "npc-interact") {
-        this.setState({ interactionIconVisible: true });
-      }
+      this.setState({ interactionIconVisible: true });
+    }
     if (e.type === "none") {
-      this.setState({ collectNoteVisible: false });
+      this.setState({ collectNote1Visible: false });
+      this.setState({ collectNote2Visible: false });
+      this.setState({ interactionIconVisible: false });
     }
     if (
       e.type === "at-objective" &&
@@ -97,7 +117,10 @@ export default class LevelThree extends Component {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>
-                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL
+                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL. 
+                  <Text style={styles.modalText}>
+                  </Text>
+                  Then go pet the nice doggo.
                 </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
                 <MenuButton
@@ -161,13 +184,93 @@ export default class LevelThree extends Component {
           currentLevel={"LevelThree"}
         />
         <View style={{ alignItems: "flex-end" }}>
+            <NoteButton
+            style={styles.NoteButton}
+            text={"Collect Note"}
+            visible={this.state.collectNote1Visible}
+            onPress={this.handleCollectNote1}
+            />
           <NoteButton
             style={styles.NoteButton}
             text={"Collect Note"}
-            visible={this.state.collectNoteVisible}
-            onPress={this.handleCollectNote}
-          />
+            visible={this.state.collectNote2Visible}
+            onPress={this.handleCollectNote2}
+            />
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.note1ModalVisible}
+            supportedOrientations={['landscape']}
+            onRequestClose={() => {
+              this.setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+              <Text style={styles.modalText}>
+              Hot Car 
+              </Text>
+              <Text style={styles.modalText}>
+              Children dying from heatstroke in cars, either because they were left or became trapped, has increased in the recent years. On April 25, the first vehicular heatstroke of 2020 occurred when a four-year-old left a home and climbed into a vehicle without his family noticing. His death follows 52 car deaths in 2019, and a record 53 deaths in 2018. 
+              </Text>
+              <Text style={styles.modalText}>
+              The majority of hot car deaths – 54% -- happen because someone forgets a child in a car. Nearly 75% of children who are forgotten and die are under 2 years old.  
+              </Text>
+              <Text style={styles.modalText}>
+              Source: https://www.nhtsa.gov/child-safety/help-prevent-hot-car-deaths 
+              </Text>  
+                <Text style={styles.textStyle}>Hide Modal</Text>
+                <MenuButton
+                  text="OK"
+                  onPress={() => {
+                    this.setState({ note1ModalVisible: false });
+                    this.setState({ note1Collected: true});
+                  }}
+                ></MenuButton>
+              </View>
+            </View>
+          </Modal>
 
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.note2ModalVisible}
+            supportedOrientations={['landscape']}
+            onRequestClose={() => {
+              this.setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+              <Text style={styles.modalText}>
+              Drowning: 
+              </Text>
+              <Text style={styles.modalText}>
+              Drowning is the leading cause of injury death in children 1 – 4. 
+              </Text>
+              <Text style={styles.modalText}>
+              Young children can drown in as little as an inch or two of water, and it can happen quickly and silently. 
+              </Text>
+              <Text style={styles.modalText}>
+              The biggest drowning threat facing families with toddlers is unexpected, unsurpervised access to water: swimming pools, hot tubs and spas, bathtubs, natural bodies of water such as ponds, and standing water in homes. For example, 69% of all drownings among children 4 and younger happen during non-swim times. 
+              </Text>
+              <Text style={styles.modalText}>
+              Research suggests that fencing can prevent more than half of all swimming pool drownings of young children. Swimming pools, including large, inflatable above-ground pools and other temporary pools, should be completely surrounded by a fence on all 4 sides.  
+              </Text>
+              <Text style={styles.modalText}>
+              Source: https://www.healthychildren.org/English/safety-prevention/at-play/Pages/Water-Safety-And-Young-Children.aspx 
+              </Text>
+                <Text style={styles.textStyle}>Hide Modal</Text>
+                <MenuButton
+                  text="OK"
+                  onPress={() => {
+                    this.setState({ note2ModalVisible: false });
+                    this.setState({ note2Collected: true});
+                  }}
+                ></MenuButton>
+              </View>
+            </View>
+          </Modal>
           <SpeakButton
             style={styles.NoteButton}
             text={"Speak"}

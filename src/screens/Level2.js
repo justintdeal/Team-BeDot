@@ -115,7 +115,10 @@ export default class LevelTwo extends Component {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>
-                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL
+                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL.
+                </Text>
+                <Text style={styles.modalText}>
+                THEN GRAB A DRINK FROM THE FRIDGE.
                 </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
                 <MenuButton
@@ -202,8 +205,32 @@ export default class LevelTwo extends Component {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
+              <Text style={styles.modalText}>
+                Fires & Burns 
+                </Text>
                 <Text style={styles.modalText}>
-                Note #1! Unsure if this is thermos or medicine poisoning
+                Cooking is the leading cause of home fires in the United States. 
+                </Text>
+                <Text style={styles.modalText}>
+                Fires can start from: 
+                </Text>
+                <Text style={styles.modalText}>
+                Unsupervised food on a stove, in a microwave, or in an oven. Grease spills. A dish towel too close to the burner. A coffee pot accidentally left on.  
+                </Text>
+                <Text style={styles.modalText}>
+                Tips for using the stove: 
+                </Text>
+                <Text style={styles.modalText}>
+                Do not leave kids unsupervised. 
+                </Text>
+                <Text style={styles.modalText}>
+                Turn all pot handles, so they cannot be knocked over. 
+                </Text>
+                <Text style={styles.modalText}>
+                Do not wear loose-fitted clothing that has the potential to catch fire. 
+                </Text>
+                <Text style={styles.modalText}>
+                Source: https://kidshealth.org/en/parents/fire.html 
                 </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
                 <MenuButton
@@ -216,7 +243,6 @@ export default class LevelTwo extends Component {
               </View>
             </View>
           </Modal>
-
           <Modal
             animationType="slide"
             transparent={true}
@@ -228,11 +254,26 @@ export default class LevelTwo extends Component {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>
-                  Note #2! - Didn't find cabinet safety info.
+              <Text style={styles.modalText}>
+                Poisons 
                 </Text>
                 <Text style={styles.modalText}>
-                  Change to stove and burn safety?
+                Every day, over 300 children in the U.S. ages 0 to 19 are treated in an emergency department, and two children die, as a result of being poisoned. 
+                </Text>
+                <Text style={styles.modalText}>
+                Items in home: 
+                </Text>
+                <Text style={styles.modalText}>
+                Household cleaners, Medicines 
+                </Text>
+                <Text style={styles.modalText}>
+                Prevention Tips: 
+                </Text>
+                <Text style={styles.modalText}>
+                Lock them up and keep them away. Keep medicines and other potentially toxic products, such as cleaners and detergents, in their original packaging where children cannot see or get to them. Read the label. Throw away if not needed. 
+                </Text>
+                <Text style={styles.modalText}>
+                Source: https://www.cdc.gov/safechild/poisoning/index.html  
                 </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
                 <MenuButton
