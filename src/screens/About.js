@@ -5,7 +5,7 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text } from "react-native";
 import MenuButton from "../components/MenuButton";
-import Background from "../assets/homebkg.png";
+import Background from "../assets/aboutScreen.png";
 
 export default function About({ navigation }) {
   //NAV CALLBACK

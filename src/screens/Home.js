@@ -5,8 +5,8 @@
 import React, { useEffect, useState } from "react";
 import { View, ImageBackground, StyleSheet } from "react-native";
 import MenuButton from "../components/MenuButton";
-import Background from "../assets/homebkg.png";
 import {get} from "../Db"
+import Background from "../assets/orangeHomescreen.png";
 
 export default function Home({ navigation }) {
   const [unlocked, setLvls] = useState({ lvl2: null, lvl3: null });
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+    top: 55,
     justifyContent: "center",
   },
   button: {

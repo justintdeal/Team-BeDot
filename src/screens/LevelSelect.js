@@ -5,7 +5,7 @@
 import React, {useEffect, useState} from "react";
 import { ImageBackground, StyleSheet } from "react-native";
 import MenuButton from "../components/MenuButton";
-import Background from "../assets/homebkg.png";
+import Background from "../assets/levelSelect.png";
 import { get, insert } from "../Db";
 
 export default function LevelSelect({ navigation }) {
@@ -68,4 +68,9 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
   },
+  buttonContainer: {
+    flex: 1,
+    top: 35,
+    justifyContent: "center",
+  }
 });
