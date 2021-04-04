@@ -181,13 +181,13 @@ const Entities = () => {
     player: { 
       body: player, 
       size: [90, 90], 
-      backgroundColor:"#E6D2BA", 
+      //backgroundColor: "#E6D2BA", 
       renderer: Player 
     },
     npc: { 
       body: npc, 
       size: [90, 90], 
-      backgroundColor: "#E6D2BA", 
+      //backgroundColor: "#E6D2BA", 
       renderer: Npc 
     },
     plant: {

@@ -15,6 +15,7 @@ import GameStatusBar from "../components/GameStatusBar";
 import MenuButton from "../components/MenuButton";
 import SpeakButton from "../components/SpeakButton";
 import Movement from "../systems/Movement";
+import Background from "../assets/living-room/level-1-floor.png";
 
 
 export default class LevelOne extends Component {
@@ -130,9 +131,10 @@ export default class LevelOne extends Component {
   render() {
     const { modalVisible } = this.state;
     return (
-      // <ImageBackground source={Background}>
 
       <View style={styles.container}>
+              <ImageBackground source={Background} style={styles.image}>
+
         <View style={styles.centeredView}>
           <Modal
             animationType="slide"
@@ -306,8 +308,8 @@ export default class LevelOne extends Component {
             onPress={this.handleNPCInteraction}
           />
         </View>
+        </ImageBackground>
       </View>
-      // </ImageBackground>
     );
   }
 }
@@ -316,6 +318,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#E6D2BA",
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
   gameContainer: {
     position: "absolute",
