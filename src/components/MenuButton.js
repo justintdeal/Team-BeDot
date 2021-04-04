@@ -1,16 +1,19 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { color } from "react-native-reanimated";
 
-export default function MenuButton({ text, onPress }) {
+export default function MenuButton({ text, onPress, txtColor }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.button}>
-        <Text style={styles.buttonText}>{text}</Text>
+        <Text style={styles.buttonText, {color: txtColor}}>{text}</Text>
       </View>
     </TouchableOpacity>
   );
 }
-
+MenuButton.defaultProps = {
+  color: "black"
+}
 const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
@@ -20,7 +23,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    color: "black",
     fontWeight: "bold",
     fontSize: 18,
     textAlign: "center",
