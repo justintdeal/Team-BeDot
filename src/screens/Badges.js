@@ -127,7 +127,7 @@ export default class Badges extends React.Component {
     },
     {
       name: "Heart Badge",
-      position: "Found the dog with child safety information!",
+      position: "You pet the good doggo!",
       ID: "heart",
       photo: require("../assets/badges/heartBadge.png"),
     },
