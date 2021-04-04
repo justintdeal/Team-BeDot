@@ -74,7 +74,7 @@ const Entities = () => {
   let rug = Matter.Bodies.circle(
     (x = Constants.MAX_WIDTH * 0.8),
     (y = Constants.MAX_HEIGHT * 0.3),
-    (radius = 75),
+    (radius = 1),
     { isStatic: true }
   );
 
