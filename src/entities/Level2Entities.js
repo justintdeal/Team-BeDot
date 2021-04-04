@@ -10,6 +10,7 @@ import Refrigerator from "../components/renderers/Refrigerator";
 import Counter1 from "../components/renderers/Counter1";
 import Counter2 from "../components/renderers/Counter2";
 import Counter3 from "../components/renderers/Counter3";
+import Counter4 from "../components/renderers/Counter4";
 import Stove from "../components/renderers/Stove";
 import Sink from "../components/renderers/Sink";
 
@@ -60,6 +61,14 @@ const Entities = () => {
   let counter3 = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.69,
     Constants.MAX_HEIGHT * 0.27,
+    120,
+    120,
+    { isStatic: true }
+  );
+
+  let counter4 = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.835,
+    Constants.MAX_HEIGHT * 0.42,
     120,
     120,
     { isStatic: true }
@@ -175,6 +184,7 @@ const Entities = () => {
     counter1,
     counter2,
     counter3,
+    counter4,
     island,
     stove,
     sink,
@@ -184,8 +194,12 @@ const Entities = () => {
 
   return {
     physics: { engine: engine, world: world },
-    player: { body: player, size: [120, 120], backgroundColor:"#DBD7D2", renderer: Player },
-    npc: { body: npc, size: [120, 120], backgroundColor: "#DBD7D2", renderer: Npc },
+    player: { body: player, size: [120, 120],
+      //backgroundColor:"#DBD7D2",
+      renderer: Player },
+    npc: { body: npc, size: [120, 120], 
+      //backgroundColor: "#DBD7D2",
+      renderer: Npc },
     
     diningTable: {
       body: diningTable,
@@ -240,6 +254,12 @@ const Entities = () => {
       size: [120, 120],
       color: "black",
       renderer: Counter3,
+    },
+    counter4: {
+      body: counter4,
+      size: [120, 120],
+      color: "black",
+      renderer: Counter4,
     },
     sink: {
       body: sink,
