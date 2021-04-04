@@ -34,6 +34,7 @@ export default class LevelTwo extends Component {
 
     this.gameEngine = null;
   }
+
   pauseCheckCallback = (pauseStatus) => {
     this.setState({ engineRunning: pauseStatus });
   };
@@ -61,8 +62,46 @@ export default class LevelTwo extends Component {
     this.setState({ note2ModalVisible: true });
   }
 
+ async componentDidMount() {
+    this.state.badgeEarned = await get("coffee");
+    let gold = await get("gold2");
+    let silver = await get("silver2");
+    let bronze = await get("bronze2");
+
+    if (gold === "true") {
+      this.state.highestEarned = "gold";
+    } else if (silver === "true") {
+      this.state.highestEarned = "silver";
+    } else if (bronze === "true") {
+      this.state.highestEarned == "bronze";
+    } else {
+      this.state.highestEarned == null;
+    }
+  }
   handleLevelComplete = () => {
     this.setState({ levelComplete: true });
+    if (
+      this.state.sec < 15 &&
+      this.state.min == 0 &&
+      this.state.highestEarned !== "gold"
+    ) {
+      insert("gold2", "true");
+      insert("silver2", "false");
+      insert("bronze2", "false");
+      this.setState({ highestEarned: "gold" });
+    } else if (
+      this.state.sec < 30 &&
+      this.state.min == 0 &&
+      this.state.highestEarned !== "gold" &&
+      this.state.highestEarned !== "silver"
+    ) {
+      insert("silver2", "true");
+      insert("bronze2", "false");
+      this.setState({ highestEarned: "silver" });
+    } else {
+      insert("bronze2", "true");
+      this.setState({ highestEarned: "bronze" });
+    }
   };
   getTime = (time) => {
     this.setState({ min: time.min });

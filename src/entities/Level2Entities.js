@@ -116,13 +116,13 @@ const Entities = () => {
     120,
     { isStatic: true }
   );
-  // let topCabinet = Matter.Bodies.rectangle(
-  //   Constants.MAX_WIDTH * 0.9,
-  //   Constants.MAX_HEIGHT * 0.15,
-  //   650,
-  //   52,
-  //   { isStatic: true }
-  // );
+  let topCabinet = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.9,
+    Constants.MAX_HEIGHT * 0.15,
+    650,
+    52,
+    { isStatic: true }
+  );
   // let rightCabinet = Matter.Bodies.rectangle(
   //   Constants.MAX_WIDTH * 0.84,
   //   Constants.MAX_HEIGHT * 0.25,
@@ -178,7 +178,7 @@ const Entities = () => {
     island,
     stove,
     sink,
-    // topCabinet,
+    topCabinet,
     // rightCabinet,
   ]);
 

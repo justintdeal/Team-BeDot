@@ -28,14 +28,15 @@ export default function Home({ navigation }) {
   return (
     <ImageBackground source={Background} style={styles.image}>
       <View style={styles.buttonContainer}>
-        <MenuButton text="PLAY NOW" onPress={handlePlayNow}></MenuButton>
+        <MenuButton text="PLAY NOW" onPress={handlePlayNow} txtColor={"white"}></MenuButton>
         <MenuButton
           text="LEVEL SELECT"
           onPress={handleLevelSelect}
+          txtColor={"white"}
         ></MenuButton>
-        <MenuButton text="BADGES" onPress={handleBadgeNav}></MenuButton>
-        <MenuButton text="ABOUT" onPress={handleAboutNav}></MenuButton>
-        <MenuButton text="SETTINGS" onPress={handleSettingNav}></MenuButton>
+        <MenuButton text="BADGES" onPress={handleBadgeNav} txtColor={"white"}></MenuButton>
+        <MenuButton text="ABOUT" onPress={handleAboutNav} txtColor={"white"}></MenuButton>
+        <MenuButton text="SETTINGS" onPress={handleSettingNav} txtColor={"white"}></MenuButton>
       </View>
     </ImageBackground>
   );

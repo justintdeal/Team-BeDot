@@ -4,7 +4,6 @@ let movement = false
 const DogMove = (entities, { touches, time }) => {
   let engine = entities.physics.engine;
   let dog = entities.dog.body;
-  console.log(dog.speed)
   if (dog.speed < 1.3) {
     Matter.Body.setVelocity(dog, {
       x: (Math.random() - 0.5) * 5,

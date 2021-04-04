@@ -54,6 +54,7 @@ const Entities = () => {
     (y = 0),
     (width = Constants.MAX_WIDTH * 2),
     (height = Constants.MAX_HEIGHT / 6),
+
     { isStatic: true }
   );
   let left_wall = Matter.Bodies.rectangle(
