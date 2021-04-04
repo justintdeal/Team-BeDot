@@ -9,7 +9,7 @@ import GameStatusBar from "../components/GameStatusBar";
 import SpeakButton from "../components/SpeakButton";
 import MenuButton from "../components/MenuButton";
 import DogMove from "../systems/DogMove";
-
+import { insert, get } from "../Db";
 export default class LevelThree extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +31,8 @@ export default class LevelThree extends Component {
       interactionModalVisible: false,
       note1ModalVisible: false,
       note2ModalVisible: false,
+      heartBadgeModal: false,
+
     };
 
     this.gameEngine = null;
@@ -55,15 +57,51 @@ export default class LevelThree extends Component {
     this.setState({ note1ModalVisible: true });
   };
 
-  // callback that is called when the user hits the Note Button
-  // updates the inventory by one
-  handleCollectNote2 = () => {
+ handleCollectNote2 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
     this.setState({ note2ModalVisible: true });
+  };
+
+  async componentDidMount() {
+    this.state.badgeEarned = await get("heart");
+    let gold = await get("gold3");
+    let silver = await get("silver3");
+    let bronze = await get("bronze3");
+    if (gold === "true") {
+      this.state.highestEarned = "gold";
+    } else if (silver === "true") {
+      this.state.highestEarned = "silver";
+    } else if (bronze === "true") {
+      this.state.highestEarned == "bronze";
+    } else {
+      this.state.highestEarned == null;
+    }
   }
 
   handleLevelComplete = () => {
     this.setState({ levelComplete: true });
+    if (
+      this.state.sec < 15 &&
+      this.state.min == 0 &&
+      this.state.highestEarned !== "gold"
+    ) {
+      insert("gold3", "true");
+      insert("silver3", "false");
+      insert("bronze3", "false");
+      this.setState({ highestEarned: "gold" });
+    } else if (
+      this.state.sec < 30 &&
+      this.state.min == 0 &&
+      this.state.highestEarned !== "gold" &&
+      this.state.highestEarned !== "silver"
+    ) {
+      insert("silver3", "true");
+      insert("bronze3", "false");
+      this.setState({ highestEarned: "silver" });
+    } else {
+      insert("bronze3", "true");
+      this.setState({ highestEarned: "bronze" });
+    }
   };
 
   getTime = (time) => {
@@ -77,11 +115,15 @@ export default class LevelThree extends Component {
   };
 
   onEvent = (e) => {
+
     if (e.type === "note-one-found" && this.state.note1Collected == false) {
       this.setState({ collectNote1Visible: true });
     }
     if (e.type === "note-two-found" && this.state.note2Collected == false) {
       this.setState({ collectNote2Visible: true });
+    }
+    if (e.type === "pet" && this.state.badgeEarned == null) {
+      this.setState({ heartBadgeModal: true });
     }
     if (e.type === "npc-interact") {
       this.setState({ interactionIconVisible: true });
@@ -109,7 +151,7 @@ export default class LevelThree extends Component {
             animationType="slide"
             transparent={true}
             visible={this.state.interactionModalVisible}
-            supportedOrientations={['landscape']}
+            supportedOrientations={["landscape"]}
             onRequestClose={() => {
               this.setModalVisible(!modalVisible);
             }}
@@ -138,7 +180,7 @@ export default class LevelThree extends Component {
             animationType="slide"
             transparent={true}
             visible={this.state.levelComplete}
-            supportedOrientations={['landscape']}
+            supportedOrientations={["landscape"]}
             onRequestClosed={() => {
               this.setModalVisible(!modalVisible);
             }}
@@ -183,6 +225,28 @@ export default class LevelThree extends Component {
           timeToLevel={this.getTime}
           currentLevel={"LevelThree"}
         />
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.heartBadgeModal}
+          supportedOrientations={["landscape"]}
+          onRequestClose={() => {
+            this.setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>You Pet The Dog!</Text>
+              <MenuButton
+                text="OK"
+                onPress={() => {
+                  this.setState({ heartBadgeModal: false });
+                  insert("heart", "true");
+                }}
+              ></MenuButton>
+            </View>
+          </View>
+        </Modal>
         <View style={{ alignItems: "flex-end" }}>
             <NoteButton
             style={styles.NoteButton}

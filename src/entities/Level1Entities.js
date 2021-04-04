@@ -23,8 +23,8 @@ const Entities = () => {
   let player = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 12,
     Constants.MAX_HEIGHT / 2,
-    90,
-    90
+    30,
+    70
   );
 
   let npc = Matter.Bodies.rectangle(
@@ -45,7 +45,7 @@ const Entities = () => {
   let stairs = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.5,
     Constants.MAX_HEIGHT / 4,
-    150,
+    90,
     170,
     { isStatic: true }
   );
@@ -96,7 +96,7 @@ const Entities = () => {
   let sideTable = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 4 ,
     Constants.MAX_HEIGHT / 7 + 30,
-    10,
+    15,
     10,
     { isStatic: true }
   );
@@ -181,13 +181,13 @@ const Entities = () => {
     player: { 
       body: player, 
       size: [90, 90], 
-      backgroundColor:"#E6D2BA", 
+      //backgroundColor: "#E6D2BA", 
       renderer: Player 
     },
     npc: { 
       body: npc, 
       size: [90, 90], 
-      backgroundColor: "#E6D2BA", 
+      //backgroundColor: "#E6D2BA", 
       renderer: Npc 
     },
     plant: {

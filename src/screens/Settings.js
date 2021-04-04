@@ -5,7 +5,7 @@
 import React from "react";
 import { ImageBackground, StyleSheet } from "react-native";
 import MenuButton from "../components/MenuButton";
-import Background from "../assets/HomeBackground1.jpg";
+import Background from "../assets/homebkg.png";
 
 export default function Settings({ navigation }) {
   // NAV CALLBACKS
@@ -16,7 +16,8 @@ export default function Settings({ navigation }) {
   return (
     <ImageBackground source={Background} style={styles.image}>
       <MenuButton text="Settings"></MenuButton>
-      <MenuButton text="GO BACK" on onPress={goHome}></MenuButton>
+      <MenuButton text="GO BACK" txtColor={"color"
+      } onPress={goHome}></MenuButton>
     </ImageBackground>
   );
 }

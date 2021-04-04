@@ -5,7 +5,7 @@
 import React from "react";
 import { ImageBackground, StyleSheet } from "react-native";
 import MenuButton from "../components/MenuButton";
-import Background from "../assets/HomeBackground1.jpg";
+import Background from "../assets/homebkg.png";
 
 export default function LevelSelect({ navigation }) {
 
@@ -25,10 +25,10 @@ export default function LevelSelect({ navigation }) {
 
   return (
     <ImageBackground source={Background} style={styles.image}>
-      <MenuButton text="LIVING ROOM" onPress={launchLevelOne}></MenuButton>
-      <MenuButton text="KITCHEN" onPress={launchLevelTwo}></MenuButton>
-      <MenuButton text="BACKYARD" onPress={launchLevelThree}></MenuButton>
-      <MenuButton text="GO BACK" on onPress={goHome}></MenuButton>
+      <MenuButton text="LIVING ROOM" onPress={launchLevelOne} txtColor={"white"}></MenuButton>
+      <MenuButton text="KITCHEN" onPress={launchLevelTwo} txtColor={"white"}></MenuButton>
+      <MenuButton text="BACKYARD" onPress={launchLevelThree} txtColor={"white"}></MenuButton>
+      <MenuButton text="GO BACK" on onPress={goHome} txtColor={"white"}></MenuButton>
     </ImageBackground>
   );
 }
