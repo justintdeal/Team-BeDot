@@ -251,13 +251,13 @@ export default class LevelThree extends Component {
         <View style={{ alignItems: "flex-end" }}>
           <NoteButton
             style={styles.NoteButton}
-            text={"Collect Note"}
+            //text={"Collect Note"}
             visible={this.state.collectNote1Visible}
             onPress={this.handleCollectNote1}
           />
           <NoteButton
             style={styles.NoteButton}
-            text={"Collect Note"}
+            //text={"Collect Note"}
             visible={this.state.collectNote2Visible}
             onPress={this.handleCollectNote2}
           />
@@ -354,7 +354,7 @@ export default class LevelThree extends Component {
           </Modal>
           <SpeakButton
             style={styles.NoteButton}
-            text={"Speak"}
+            //text={"Speak"}
             visible={this.state.interactionIconVisible}
             onPress={this.handleNPCInteraction}
           />
