@@ -65,7 +65,7 @@ const Entities = () => {
   // );
   let chair = Matter.Bodies.rectangle(
     (x = Constants.MAX_WIDTH * 0.85),
-    (y = Constants.MAX_HEIGHT / 2),
+    (y = Constants.MAX_HEIGHT / 2 + 40),
     (width = 30),
     (height = 30),
     { isStatic: true }
@@ -89,8 +89,8 @@ const Entities = () => {
   let lamp = Matter.Bodies.rectangle(
     (x = Constants.MAX_WIDTH * 0.92),
     (y = Constants.MAX_HEIGHT * 0.2),
-    (width = 40),
-    (height = 20),
+    (width = 20),
+    (height = 40),
     { isStatic: true }
   );
   let sideTable = Matter.Bodies.rectangle(
@@ -215,7 +215,7 @@ const Entities = () => {
     lamp: {
       body: lamp,
       color: "black",
-      size: [25, 75],
+      size: [80, 80],
       renderer: Lamp,
     },
     sideTable: {
@@ -247,12 +247,12 @@ const Entities = () => {
     bookshelf: {
       body: bookshelf,
       color: "black",
-      size: [30, 60],
+      size: [100, 100],
       renderer: Bookshelf,
     },
     chair: {
       body: chair,
-      size: [30, 30],
+      size: [100, 100],
       color: "black",
       renderer: SofaChair,
     },
