@@ -1,5 +1,5 @@
 /*
- * Badge Screen
+ * About Screen
  */
 
 import React from "react";
