@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Modal, Text } from "react-native";
+import { StyleSheet, View, Modal, Text, ImageBackground } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Movement from "../systems/Movement";
 import Entities from "../entities/Level2Entities";
@@ -8,7 +8,8 @@ import NoteButton from "../components/NoteButton";
 import GameStatusBar from "../components/GameStatusBar";
 import MenuButton from "../components/MenuButton";
 import SpeakButton from "../components/SpeakButton";
-
+import { get, insert } from "../Db"
+import background from "../assets/kitchen/level-2-floor.png"
 export default class LevelTwo extends Component {
   constructor(props) {
     super(props);
@@ -102,6 +103,7 @@ export default class LevelTwo extends Component {
       insert("bronze2", "true");
       this.setState({ highestEarned: "bronze" });
     }
+    insert("lvl3", "true")
   };
   getTime = (time) => {
     this.setState({ min: time.min });
@@ -140,6 +142,8 @@ export default class LevelTwo extends Component {
   render() {
     const { modalVisible } = this.state;
     return (
+      <ImageBackground source={background} style={styles.image}>
+
       <View style={styles.container}>
         <View style={styles.centeredView}>
           <Modal
@@ -333,6 +337,7 @@ export default class LevelTwo extends Component {
           />
         </View>
       </View>
+      </ImageBackground>
     );
   }
 }
@@ -340,7 +345,12 @@ export default class LevelTwo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#DBD7D2",
+    backgroundColor: "transparent",
+  },  
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
   gameContainer: {
     position: "absolute",

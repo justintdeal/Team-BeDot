@@ -16,6 +16,7 @@ import MenuButton from "../components/MenuButton";
 import SpeakButton from "../components/SpeakButton";
 import Movement from "../systems/Movement";
 import { insert, get } from "../Db";
+import background from "../assets/living-room/level-1-floor.png";
 
 export default class LevelOne extends Component {
   constructor(props) {
@@ -101,13 +102,15 @@ export default class LevelOne extends Component {
   // called after contacting the stairs with a full inventory
   handleLevelComplete = () => {
     this.setState({ levelComplete: true });
-    if (this.state.sec < 15 &&
-      this.state.min == 0 && 
-      this.state.highestEarned !== "gold") {
+    if (
+      this.state.sec < 15 &&
+      this.state.min == 0 &&
+      this.state.highestEarned !== "gold"
+    ) {
       insert("gold1", "true");
       insert("silver1", "false");
       insert("bronze1", "false");
-      this.setState({highestEarned: "gold"})
+      this.setState({ highestEarned: "gold" });
     } else if (
       this.state.sec < 30 &&
       this.state.min == 0 &&
@@ -116,11 +119,12 @@ export default class LevelOne extends Component {
     ) {
       insert("silver1", "true");
       insert("bronze1", "false");
-      this.setState({highestEarned: "silver"})
+      this.setState({ highestEarned: "silver" });
     } else {
-      insert("bronze1", "true")
-      this.setState({highestEarned: "bronze"})
+      insert("bronze1", "true");
+      this.setState({ highestEarned: "bronze" });
     }
+    insert("lvl2", "true");
   };
 
   //confusing process to get time from the timer component
@@ -168,224 +172,224 @@ export default class LevelOne extends Component {
   render() {
     const { modalVisible } = this.state;
     return (
-
-      <View style={styles.container}>
-             {/* <ImageBackground source={Background} style={styles.image}> */}
-
-        <View style={styles.centeredView}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.interactionModalVisible}
-            supportedOrientations={["landscape"]}
-            onRequestClose={() => {
-              this.setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>
-                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL
-                </Text>
-                <Text style={styles.textStyle}>Hide Modal</Text>
-                <MenuButton
-                  text="OK"
-                  onPress={() => {
-                    this.setState({ interactionModalVisible: false });
-                  }}
-                ></MenuButton>
+      <ImageBackground source={background} style={styles.image}>
+        <View style={styles.container}>
+          <View style={styles.centeredView}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={this.state.interactionModalVisible}
+              supportedOrientations={["landscape"]}
+              onRequestClose={() => {
+                this.setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>
+                    COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL
+                  </Text>
+                  <Text style={styles.textStyle}>Hide Modal</Text>
+                  <MenuButton
+                    text="OK"
+                    onPress={() => {
+                      this.setState({ interactionModalVisible: false });
+                    }}
+                  ></MenuButton>
+                </View>
               </View>
-            </View>
-          </Modal>
-        </View>
-        <View style={styles.centeredView}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.levelComplete}
-            supportedOrientations={["landscape"]}
-            onRequestClosed={() => {
-              this.setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>
-                  Time: {this.state.min}:{this.state.sec}:{this.state.msec}
-                </Text>
-                <MenuButton
-                  text="CONTINUE"
-                  onPress={this.handleNextLevel}
-                ></MenuButton>
-                <MenuButton
-                  text="PLAY AGAIN"
-                  onPress={this.handleLevelRestart}
-                ></MenuButton>
-                <MenuButton
-                  text="QUIT"
-                  onPress={this.handleReturnToHome}
-                ></MenuButton>
+            </Modal>
+          </View>
+          <View style={styles.centeredView}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={this.state.levelComplete}
+              supportedOrientations={["landscape"]}
+              onRequestClosed={() => {
+                this.setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>
+                    Time: {this.state.min}:{this.state.sec}:{this.state.msec}
+                  </Text>
+                  <MenuButton
+                    text="CONTINUE"
+                    onPress={this.handleNextLevel}
+                  ></MenuButton>
+                  <MenuButton
+                    text="PLAY AGAIN"
+                    onPress={this.handleLevelRestart}
+                  ></MenuButton>
+                  <MenuButton
+                    text="QUIT"
+                    onPress={this.handleReturnToHome}
+                  ></MenuButton>
+                </View>
               </View>
-            </View>
-          </Modal>
-        </View>
-        <GameEngine
-          ref={(ref) => {
-            this.gameEngine = ref;
-          }}
-          style={styles.gameContainer}
-          running={this.state.engineRunning}
-          systems={[Movement, Dispatches]}
-          onEvent={this.onEvent}
-          entities={Entities()}
-        ></GameEngine>
-        <GameStatusBar
-          pauseUpdater={this.pauseCheckCallback}
-          inventorySize={this.state.inventorySize}
-          inventoryCap={this.state.inventoryCap}
-          navigation={this.props.navigation}
-          levelComplete={this.state.levelComplete}
-          timeToLevel={this.getTime}
-          currentLevel={"LevelOne"}
-        />
-        <View style={{ alignItems: "flex-end" }}>
-          <NoteButton
-            style={styles.NoteButton}
-            text={"Collect Note"}
-            visible={this.state.collectNote1Visible}
-            onPress={this.handleCollectNote1}
+            </Modal>
+          </View>
+          <GameEngine
+            ref={(ref) => {
+              this.gameEngine = ref;
+            }}
+            style={styles.gameContainer}
+            running={this.state.engineRunning}
+            systems={[Movement, Dispatches]}
+            onEvent={this.onEvent}
+            entities={Entities()}
+          ></GameEngine>
+          <GameStatusBar
+            pauseUpdater={this.pauseCheckCallback}
+            inventorySize={this.state.inventorySize}
+            inventoryCap={this.state.inventoryCap}
+            navigation={this.props.navigation}
+            levelComplete={this.state.levelComplete}
+            timeToLevel={this.getTime}
+            currentLevel={"LevelOne"}
           />
-          <NoteButton
-            style={styles.NoteButton}
-            text={"Collect Note"}
-            visible={this.state.collectNote2Visible}
-            onPress={this.handleCollectNote2}
-          />
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.note1ModalVisible}
-            supportedOrientations={["landscape"]}
-            onRequestClose={() => {
-              this.setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>Coins:</Text>
-                <Text style={styles.modalText}>
-                  Choose a toy chest without a lid. Toys should be large enough
-                  — at least 1¼" (3 centimeters) in diameter and 2¼" (6
-                  centimeters) in length — so that they can't be swallowed or
-                  lodged in the windpipe. Avoid marbles, coins, balls, and games
-                  with balls that are 1.75 inches (4.4 centimeters) in diameter
-                  or less because they can become lodged in the throat above the
-                  windpipe and cause trouble with breathing.
-                </Text>
-                <Text style={styles.modalText}>
-                  Source: https://kidshealth.org/en/parents/products-toys.html
-                </Text>
-                <Text style={styles.textStyle}>Hide Modal</Text>
-                <MenuButton
-                  text="OK"
-                  onPress={() => {
-                    this.setState({ note1ModalVisible: false });
-                    this.setState({ note1Collected: true });
-                    if (this.state.badgeEarned == null) {
-                      this.setState({ markBadgeModal: true });
-                    }
-                  }}
-                ></MenuButton>
+          <View style={{ alignItems: "flex-end" }}>
+            <NoteButton
+              style={styles.NoteButton}
+              text={"Collect Note"}
+              visible={this.state.collectNote1Visible}
+              onPress={this.handleCollectNote1}
+            />
+            <NoteButton
+              style={styles.NoteButton}
+              text={"Collect Note"}
+              visible={this.state.collectNote2Visible}
+              onPress={this.handleCollectNote2}
+            />
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={this.state.note1ModalVisible}
+              supportedOrientations={["landscape"]}
+              onRequestClose={() => {
+                this.setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>Coins:</Text>
+                  <Text style={styles.modalText}>
+                    Choose a toy chest without a lid. Toys should be large
+                    enough — at least 1¼" (3 centimeters) in diameter and 2¼" (6
+                    centimeters) in length — so that they can't be swallowed or
+                    lodged in the windpipe. Avoid marbles, coins, balls, and
+                    games with balls that are 1.75 inches (4.4 centimeters) in
+                    diameter or less because they can become lodged in the
+                    throat above the windpipe and cause trouble with breathing.
+                  </Text>
+                  <Text style={styles.modalText}>
+                    Source: https://kidshealth.org/en/parents/products-toys.html
+                  </Text>
+                  <Text style={styles.textStyle}>Hide Modal</Text>
+                  <MenuButton
+                    text="OK"
+                    onPress={() => {
+                      this.setState({ note1ModalVisible: false });
+                      this.setState({ note1Collected: true });
+                      if (this.state.badgeEarned == null) {
+                        this.setState({ markBadgeModal: true });
+                      }
+                    }}
+                  ></MenuButton>
+                </View>
               </View>
-            </View>
-          </Modal>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.markBadgeModal}
-            supportedOrientations={["landscape"]}
-            onRequestClose={() => {
-              this.setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>
-                  Congrats! You found your first Note. Go to the badges page to
-                  track your progress!
-                </Text>
-                <MenuButton
-                  text="OK"
-                  onPress={() => {
-                    this.setState({ markBadgeModal: false });
-                    insert("mark", "true");
-                  }}
-                ></MenuButton>
+            </Modal>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={this.state.markBadgeModal}
+              supportedOrientations={["landscape"]}
+              onRequestClose={() => {
+                this.setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>
+                    Congrats! You found your first Note. Go to the badges page
+                    to track your progress!
+                  </Text>
+                  <MenuButton
+                    text="OK"
+                    onPress={() => {
+                      this.setState({ markBadgeModal: false });
+                      insert("mark", "true");
+                      this.setState({ badgeEarned: "true" });
+                    }}
+                  ></MenuButton>
+                </View>
               </View>
-            </View>
-          </Modal>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.note2ModalVisible}
-            supportedOrientations={["landscape"]}
-            onRequestClose={() => {
-              this.setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>Outlets:</Text>
-                <Text style={styles.modalText}>
-                  Outlet Covers are great solutions to prevent accidental
-                  electrocutions. Nearly one-third of accidents occur when a
-                  child inserts common household items into receptacles, 70
-                  percent of them occurring when adults are present.  Items that
-                  children insert into outlets can be found anywhere, and
-                  include:
-                </Text>
-                <Text style={styles.modalText}>
-                  Hairpins, Keys, Plugs, Paper clips and staples, Tools,
-                  Jewelry, Belt buckles, Nail files, Knives
-                </Text>
-                <Text style={styles.modalText}>And more</Text>
-                <Text style={styles.modalText}>
-                  Approximately 100 kids die each year by electrocution, 2 and
-                  many others are seriously hurt.
-                </Text>
-                <Text style={styles.modalText}>
-                  95 percent of injuries resulting from electrical outlets will
-                  involve burns. Though they range in severity, it is important
-                  to understand that burns are very serious in young children
-                  whose skin is thin and offers little resistance to electric
-                  flow or heat.
-                </Text>
-                <Text style={styles.modalText}>
-                  Source: https://mrelectric.com/child-proof-outlets
-                </Text>
-                <Text style={styles.textStyle}>Hide Modal</Text>
-                <MenuButton
-                  text="OK"
-                  onPress={() => {
-                    this.setState({ note2ModalVisible: false });
-                    this.setState({ note2Collected: true });
-                    if (this.state.badgeEarned == null) {
-                      this.setState({ markBadgeModal: true });
-                    }
-                  }}
-                ></MenuButton>
+            </Modal>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={this.state.note2ModalVisible}
+              supportedOrientations={["landscape"]}
+              onRequestClose={() => {
+                this.setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>Outlets:</Text>
+                  <Text style={styles.modalText}>
+                    Outlet Covers are great solutions to prevent accidental
+                    electrocutions. Nearly one-third of accidents occur when a
+                    child inserts common household items into receptacles, 70
+                    percent of them occurring when adults are present.  Items
+                    that children insert into outlets can be found anywhere, and
+                    include:
+                  </Text>
+                  <Text style={styles.modalText}>
+                    Hairpins, Keys, Plugs, Paper clips and staples, Tools,
+                    Jewelry, Belt buckles, Nail files, Knives
+                  </Text>
+                  <Text style={styles.modalText}>And more</Text>
+                  <Text style={styles.modalText}>
+                    Approximately 100 kids die each year by electrocution, 2 and
+                    many others are seriously hurt.
+                  </Text>
+                  <Text style={styles.modalText}>
+                    95 percent of injuries resulting from electrical outlets
+                    will involve burns. Though they range in severity, it is
+                    important to understand that burns are very serious in young
+                    children whose skin is thin and offers little resistance to
+                    electric flow or heat.
+                  </Text>
+                  <Text style={styles.modalText}>
+                    Source: https://mrelectric.com/child-proof-outlets
+                  </Text>
+                  <Text style={styles.textStyle}>Hide Modal</Text>
+                  <MenuButton
+                    text="OK"
+                    onPress={() => {
+                      this.setState({ note2ModalVisible: false });
+                      this.setState({ note2Collected: true });
+                      if (this.state.badgeEarned == null) {
+                        this.setState({ markBadgeModal: true });
+                      }
+                    }}
+                  ></MenuButton>
+                </View>
               </View>
-            </View>
-          </Modal>
-          <SpeakButton
-            style={styles.NoteButton}
-            text={"Speak"}
-            visible={this.state.interactionIconVisible}
-            onPress={this.handleNPCInteraction}
-          />
+            </Modal>
+            <SpeakButton
+              style={styles.NoteButton}
+              text={"Speak"}
+              visible={this.state.interactionIconVisible}
+              onPress={this.handleNPCInteraction}
+            />
+          </View>
+          {/* </ImageBackground> */}
         </View>
-        {/* </ImageBackground> */}
-      </View>
+      </ImageBackground>
     );
   }
 }
@@ -393,7 +397,7 @@ export default class LevelOne extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E6D2BA",
+    backgroundColor: "transparent",
   },
   image: {
     flex: 1,

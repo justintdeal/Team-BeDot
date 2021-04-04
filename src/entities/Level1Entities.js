@@ -38,8 +38,8 @@ const Entities = () => {
   let plant = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.6,
     Constants.MAX_HEIGHT / 3,
-    95,
-    95,
+    70,
+    70,
     { isStatic: true }
   );
   let stairs = Matter.Bodies.rectangle(
@@ -74,7 +74,7 @@ const Entities = () => {
   let rug = Matter.Bodies.circle(
     (x = Constants.MAX_WIDTH * 0.8),
     (y = Constants.MAX_HEIGHT * 0.3),
-    (radius = 1),
+    (radius = 0),
     { isStatic: true }
   );
 
@@ -158,13 +158,13 @@ const Entities = () => {
   Matter.World.add(world, [
     player,
     top_wall,
-    npc,
     plant,
     stairs,
     fireplace,
     // desk,
     chair,
     rug,
+    npc,
     bookshelf,
     lamp,
     sideTable,
@@ -178,12 +178,7 @@ const Entities = () => {
 
   return {
     physics: { engine: engine, world: world },
-    player: { 
-      body: player, 
-      size: [90, 90], 
-      //backgroundColor: "#E6D2BA", 
-      renderer: Player 
-    },
+
     npc: { 
       body: npc, 
       size: [90, 90], 
@@ -214,24 +209,9 @@ const Entities = () => {
     //   color: "black",
     //   renderer: Wall,
     // },
-    chair: {
-      body: chair,
-      size: [30, 30],
-      color: "black",
-      renderer: SofaChair,
-    },
-    rug: {
-      body: rug,
-      color: "black",
-      radius: 75,
-      renderer: Rug,
-    },
-    bookshelf: {
-      body: bookshelf,
-      color: "black",
-      size: [30, 60],
-      renderer: Bookshelf,
-    },
+
+
+
     lamp: {
       body: lamp,
       color: "black",
@@ -258,7 +238,30 @@ const Entities = () => {
       color: "black",
       renderer: Couch, 
     },
-
+    rug: {
+      body: rug,
+      color: "black",
+      radius: 75,
+      renderer: Rug,
+    },
+    bookshelf: {
+      body: bookshelf,
+      color: "black",
+      size: [30, 60],
+      renderer: Bookshelf,
+    },
+    chair: {
+      body: chair,
+      size: [30, 30],
+      color: "black",
+      renderer: SofaChair,
+    },
+    player: { 
+      body: player, 
+      size: [90, 90], 
+      //backgroundColor: "#E6D2BA", 
+      renderer: Player 
+    },
     tv: {
       body: tv,
       size: [70, 70],

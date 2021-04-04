@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Modal, Text } from "react-native";
+import { StyleSheet, View, Modal, Text, ImageBackground } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Movement from "../systems/Movement";
 import Entities from "../entities/Level3Entities";
@@ -10,6 +10,8 @@ import SpeakButton from "../components/SpeakButton";
 import MenuButton from "../components/MenuButton";
 import DogMove from "../systems/DogMove";
 import { insert, get } from "../Db";
+import background from "../assets/yard/level-3-floor.png"
+
 export default class LevelThree extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +34,6 @@ export default class LevelThree extends Component {
       note1ModalVisible: false,
       note2ModalVisible: false,
       heartBadgeModal: false,
-
     };
 
     this.gameEngine = null;
@@ -57,7 +58,7 @@ export default class LevelThree extends Component {
     this.setState({ note1ModalVisible: true });
   };
 
- handleCollectNote2 = () => {
+  handleCollectNote2 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
     this.setState({ note2ModalVisible: true });
   };
@@ -115,7 +116,6 @@ export default class LevelThree extends Component {
   };
 
   onEvent = (e) => {
-
     if (e.type === "note-one-found" && this.state.note1Collected == false) {
       this.setState({ collectNote1Visible: true });
     }
@@ -145,6 +145,7 @@ export default class LevelThree extends Component {
   render() {
     const { modalVisible } = this.state;
     return (
+      <ImageBackground source={background} style={styles.image}>
       <View style={styles.container}>
         <View style={styles.centeredView}>
           <Modal
@@ -159,9 +160,8 @@ export default class LevelThree extends Component {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>
-                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL. 
-                  <Text style={styles.modalText}>
-                  </Text>
+                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL.
+                  <Text style={styles.modalText}></Text>
                   Then go pet the nice doggo.
                 </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
@@ -242,53 +242,60 @@ export default class LevelThree extends Component {
                 onPress={() => {
                   this.setState({ heartBadgeModal: false });
                   insert("heart", "true");
+                  this.setState({ badgeEarned: "true" });
                 }}
               ></MenuButton>
             </View>
           </View>
         </Modal>
         <View style={{ alignItems: "flex-end" }}>
-            <NoteButton
+          <NoteButton
             style={styles.NoteButton}
             text={"Collect Note"}
             visible={this.state.collectNote1Visible}
             onPress={this.handleCollectNote1}
-            />
+          />
           <NoteButton
             style={styles.NoteButton}
             text={"Collect Note"}
             visible={this.state.collectNote2Visible}
             onPress={this.handleCollectNote2}
-            />
+          />
           <Modal
             animationType="slide"
             transparent={true}
             visible={this.state.note1ModalVisible}
-            supportedOrientations={['landscape']}
+            supportedOrientations={["landscape"]}
             onRequestClose={() => {
               this.setModalVisible(!modalVisible);
             }}
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-              <Text style={styles.modalText}>
-              Hot Car 
-              </Text>
-              <Text style={styles.modalText}>
-              Children dying from heatstroke in cars, either because they were left or became trapped, has increased in the recent years. On April 25, the first vehicular heatstroke of 2020 occurred when a four-year-old left a home and climbed into a vehicle without his family noticing. His death follows 52 car deaths in 2019, and a record 53 deaths in 2018. 
-              </Text>
-              <Text style={styles.modalText}>
-              The majority of hot car deaths – 54% -- happen because someone forgets a child in a car. Nearly 75% of children who are forgotten and die are under 2 years old.  
-              </Text>
-              <Text style={styles.modalText}>
-              Source: https://www.nhtsa.gov/child-safety/help-prevent-hot-car-deaths 
-              </Text>  
+                <Text style={styles.modalText}>Hot Car</Text>
+                <Text style={styles.modalText}>
+                  Children dying from heatstroke in cars, either because they
+                  were left or became trapped, has increased in the recent
+                  years. On April 25, the first vehicular heatstroke of 2020
+                  occurred when a four-year-old left a home and climbed into a
+                  vehicle without his family noticing. His death follows 52 car
+                  deaths in 2019, and a record 53 deaths in 2018.
+                </Text>
+                <Text style={styles.modalText}>
+                  The majority of hot car deaths – 54% -- happen because someone
+                  forgets a child in a car. Nearly 75% of children who are
+                  forgotten and die are under 2 years old.
+                </Text>
+                <Text style={styles.modalText}>
+                  Source:
+                  https://www.nhtsa.gov/child-safety/help-prevent-hot-car-deaths
+                </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
                 <MenuButton
                   text="OK"
                   onPress={() => {
                     this.setState({ note1ModalVisible: false });
-                    this.setState({ note1Collected: true});
+                    this.setState({ note1Collected: true });
                   }}
                 ></MenuButton>
               </View>
@@ -299,37 +306,47 @@ export default class LevelThree extends Component {
             animationType="slide"
             transparent={true}
             visible={this.state.note2ModalVisible}
-            supportedOrientations={['landscape']}
+            supportedOrientations={["landscape"]}
             onRequestClose={() => {
               this.setModalVisible(!modalVisible);
             }}
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-              <Text style={styles.modalText}>
-              Drowning: 
-              </Text>
-              <Text style={styles.modalText}>
-              Drowning is the leading cause of injury death in children 1 – 4. 
-              </Text>
-              <Text style={styles.modalText}>
-              Young children can drown in as little as an inch or two of water, and it can happen quickly and silently. 
-              </Text>
-              <Text style={styles.modalText}>
-              The biggest drowning threat facing families with toddlers is unexpected, unsurpervised access to water: swimming pools, hot tubs and spas, bathtubs, natural bodies of water such as ponds, and standing water in homes. For example, 69% of all drownings among children 4 and younger happen during non-swim times. 
-              </Text>
-              <Text style={styles.modalText}>
-              Research suggests that fencing can prevent more than half of all swimming pool drownings of young children. Swimming pools, including large, inflatable above-ground pools and other temporary pools, should be completely surrounded by a fence on all 4 sides.  
-              </Text>
-              <Text style={styles.modalText}>
-              Source: https://www.healthychildren.org/English/safety-prevention/at-play/Pages/Water-Safety-And-Young-Children.aspx 
-              </Text>
+                <Text style={styles.modalText}>Drowning:</Text>
+                <Text style={styles.modalText}>
+                  Drowning is the leading cause of injury death in children 1 –
+                  4.
+                </Text>
+                <Text style={styles.modalText}>
+                  Young children can drown in as little as an inch or two of
+                  water, and it can happen quickly and silently.
+                </Text>
+                <Text style={styles.modalText}>
+                  The biggest drowning threat facing families with toddlers is
+                  unexpected, unsurpervised access to water: swimming pools, hot
+                  tubs and spas, bathtubs, natural bodies of water such as
+                  ponds, and standing water in homes. For example, 69% of all
+                  drownings among children 4 and younger happen during non-swim
+                  times.
+                </Text>
+                <Text style={styles.modalText}>
+                  Research suggests that fencing can prevent more than half of
+                  all swimming pool drownings of young children. Swimming pools,
+                  including large, inflatable above-ground pools and other
+                  temporary pools, should be completely surrounded by a fence on
+                  all 4 sides.
+                </Text>
+                <Text style={styles.modalText}>
+                  Source:
+                  https://www.healthychildren.org/English/safety-prevention/at-play/Pages/Water-Safety-And-Young-Children.aspx
+                </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
                 <MenuButton
                   text="OK"
                   onPress={() => {
                     this.setState({ note2ModalVisible: false });
-                    this.setState({ note2Collected: true});
+                    this.setState({ note2Collected: true });
                   }}
                 ></MenuButton>
               </View>
@@ -343,6 +360,7 @@ export default class LevelThree extends Component {
           />
         </View>
       </View>
+      </ImageBackground>
     );
   }
 }
@@ -350,7 +368,12 @@ export default class LevelThree extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#DBD7D2",
+    backgroundColor: "transparent",
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
   gameContainer: {
     position: "absolute",
