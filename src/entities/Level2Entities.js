@@ -13,6 +13,7 @@ import Counter3 from "../components/renderers/Counter3";
 import Counter4 from "../components/renderers/Counter4";
 import Stove from "../components/renderers/Stove";
 import Sink from "../components/renderers/Sink";
+import Corner from "../components/renderers/Corner";
 
 const Entities = () => {
   let engine = Matter.Engine.create({ enableSleeping: false });
@@ -22,15 +23,15 @@ const Entities = () => {
   let player = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH / 8,
     Constants.MAX_HEIGHT / 2,
-    120,
-    120
+    30,
+    70,
   );
 
   let npc = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.5,
     Constants.MAX_HEIGHT * 0.66,
-    120,
-    120,
+    30,
+    70,
     { isStatic: true }
   );
 
@@ -45,48 +46,64 @@ const Entities = () => {
   let counter1 = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.625,
     Constants.MAX_HEIGHT * 0.27,
-    120,
-    120,
+    55,
+    75,
     { isStatic: true }
   );
 
   let counter2 = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.82,
     Constants.MAX_HEIGHT * 0.27,
-    120,
-    120,
+    55,
+    75,
     { isStatic: true }
   );
 
   let counter3 = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.69,
     Constants.MAX_HEIGHT * 0.27,
-    120,
-    120,
+    55,
+    75,
     { isStatic: true }
   );
 
   let counter4 = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH * 0.835,
-    Constants.MAX_HEIGHT * 0.42,
-    120,
-    120,
+    Constants.MAX_WIDTH * 0.9,
+    Constants.MAX_HEIGHT * 0.45,
+    55,
+    75,
+    { isStatic: true }
+  );
+
+  let counter5 = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.9,
+    Constants.MAX_HEIGHT * 0.71,
+    55,
+    75,
+    { isStatic: true }
+  );
+
+  let corner = Matter.Bodies.rectangle(
+    Constants.MAX_WIDTH * 0.9-10,
+    Constants.MAX_HEIGHT * 0.27,
+    55,
+    75,
     { isStatic: true }
   );
 
   let stove = Matter.Bodies.rectangle(
-    Constants.MAX_WIDTH * 0.835,
-    Constants.MAX_HEIGHT * 0.35,
-    105,
-    105,
+    Constants.MAX_WIDTH * 0.9,
+    Constants.MAX_HEIGHT * 0.58,
+    55,
+    75,
     { isStatic: true }
   );
 
   let sink = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.755,
     Constants.MAX_HEIGHT * 0.27,
-    120,
-    120,
+    55,
+    75,
     { isStatic: true }
   );
   // let chairOne = Matter.Bodies.circle(
@@ -114,15 +131,15 @@ const Entities = () => {
   let island = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.65,
     Constants.MAX_HEIGHT * 0.66,
-    140,
-    140,
+    100,
+    70,
     { isStatic: true }
   );
   let refrigerator = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.55,
     Constants.MAX_HEIGHT * 0.25,
-    120,
-    120,
+    30,
+    75,
     { isStatic: true }
   );
   let topCabinet = Matter.Bodies.rectangle(
@@ -185,10 +202,12 @@ const Entities = () => {
     counter2,
     counter3,
     counter4,
+    counter5,
     island,
     stove,
     sink,
     topCabinet,
+    corner,
     // rightCabinet,
   ]);
 
@@ -260,6 +279,18 @@ const Entities = () => {
       size: [120, 120],
       color: "black",
       renderer: Counter4,
+    },
+    counter5: {
+      body: counter5,
+      size: [120, 120],
+      color: "black",
+      renderer: Counter4,
+    },
+    corner: {
+      body: corner,
+      size: [120, 120],
+      color: "black",
+      renderer: Corner,
     },
     sink: {
       body: sink,
