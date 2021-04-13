@@ -81,7 +81,7 @@ export default class GameStatusBar extends Component {
             ></Button>
           </View>
           <Text style={{ color: "white", justifyContent: "center" }}>
-            Inventory: {this.state.inventorySize}/{this.state.inventoryCap}
+            Items: {this.state.inventorySize}/{this.state.inventoryCap}
           </Text>
           <View style={{ marginLeft: "65%" }}>
             <Timer
