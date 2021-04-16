@@ -1,4 +1,7 @@
-# Team-BeDot: Child Safety Application
+# Team-BeDot: ChildSafe Application
+JIE 0346 Spring 2021
+
+Team members: Samuel Thomas, Justin Deal, Jayla Demaine, Sora Bang, Elina Ebby
 
 This is a cross platform mobile application created with React Native and Expo. The goal of this app is to help new parents learn critical child safety measures and best practices. 
 
