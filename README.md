@@ -20,3 +20,6 @@ You can install Node.js from [here](https://nodejs.org/en/download/).
 - To run a web application use `npm run web` or `expo start --web`
 - To run an iOS application use `npm run ios` or `expo start --ios`
 - To run an Android application use `npm run android` or `expo start --android`
+
+
+ZenHub: https://app.zenhub.com/workspaces/team-bedot-600aeedff66604000e200919/board?repos=312147578 
