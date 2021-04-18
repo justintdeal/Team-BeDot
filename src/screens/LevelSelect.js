@@ -48,14 +48,14 @@ export default function LevelSelect({ navigation }) {
       <ImageBackground source={Background} style={styles.image}>
         <MenuButton text="LIVING ROOM" onPress={launchLevelOne} txtColor={"white"}></MenuButton>
         <MenuButton text="KITCHEN" onPress={launchLevelTwo} txtColor={"white"}></MenuButton>
-        <MenuButton text="GO BACK" on onPress={goHome} txtColor={"white"}></MenuButton>
+        <MenuButton text="GO BACK" onPress={goHome} txtColor={"white"}></MenuButton>
       </ImageBackground>
     );
   } else {
     return (
       <ImageBackground source={Background} style={styles.image}>
         <MenuButton text="LIVING ROOM" onPress={launchLevelOne} txtColor={"white"}></MenuButton>
-        <MenuButton text="GO BACK" on onPress={goHome} txtColor={"white"}></MenuButton>
+        <MenuButton text="GO BACK" onPress={goHome} txtColor={"white"}></MenuButton>
       </ImageBackground>
     );
   }
