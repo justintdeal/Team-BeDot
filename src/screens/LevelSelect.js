@@ -40,7 +40,7 @@ export default function LevelSelect({ navigation }) {
         <MenuButton text="LIVING ROOM" onPress={launchLevelOne} txtColor={"white"}></MenuButton>
         <MenuButton text="KITCHEN" onPress={launchLevelTwo} txtColor={"white"}></MenuButton>
         <MenuButton text="BACKYARD" onPress={launchLevelThree} txtColor={"white"}></MenuButton>
-        <MenuButton text="GO BACK" on onPress={goHome} txtColor={"white"}></MenuButton>
+        <MenuButton text="GO BACK" onPress={goHome} txtColor={"white"}></MenuButton>
       </ImageBackground>
     );
   } else if (unlocked["lvl2"] != null) {
