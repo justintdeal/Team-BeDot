@@ -1,5 +1,8 @@
 
-
+/*
+* This system is responsible for detecting collisions and interactions in level three
+* and informing the rest of the app 
+*/
 
 
 import Matter from "matter-js";
