@@ -1,5 +1,5 @@
 /*
-* This system is responsible for detecting collisions and interactions in level one
+* This system is responsible for detecting collisions and interactions in level two
 * and informing the rest of the app 
 */
 
