@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { View, ImageBackground, StyleSheet } from "react-native";
 import MenuButton from "../components/MenuButton";
 import {get} from "../Db"
-import Background from "../assets/orangeHomescreen.png";
+import Background from "../assets/homescreen.png";
 
 export default function Home({ navigation }) {
   const [unlocked, setLvls] = useState({ lvl2: null, lvl3: null });
@@ -48,27 +48,27 @@ export default function Home({ navigation }) {
         <MenuButton
           text="PLAY NOW"
           onPress={handlePlayNow}
-          txtColor={"white"}
+          txtColor={"black"}
         ></MenuButton>
         <MenuButton
           text="LEVEL SELECT"
           onPress={handleLevelSelect}
-          txtColor={"white"}
+          txtColor={"black"}
         ></MenuButton>
         <MenuButton
           text="BADGES"
           onPress={handleBadgeNav}
-          txtColor={"white"}
+          txtColor={"black"}
         ></MenuButton>
         <MenuButton
           text="ABOUT"
           onPress={handleAboutNav}
-          txtColor={"white"}
+          txtColor={"black"}
         ></MenuButton>
         <MenuButton
           text="SETTINGS"
           onPress={handleSettingNav}
-          txtColor={"white"}
+          txtColor={"black"}
         ></MenuButton>
       </View>
     </ImageBackground>
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     flex: 1,
     top: 55,
     justifyContent: "center",
+    marginTop: 50,
   },
   button: {
     color: "black",

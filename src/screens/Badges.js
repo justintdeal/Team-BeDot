@@ -21,8 +21,8 @@ function Item({ item }) {
         style={{ height: 100, width: 100 }}
       />
       <View style={{ alignItems: "center", flex: 1 }}>
-        <Text style={{ fontWeight: "bold", color: "white", fontSize: 22 }}>{item.name}</Text>
-        <Text style={{color: "white", paddingTop: Constants.MAX_HEIGHT*.02, fontSize:20}}>{item.position}</Text>
+        <Text style={{ fontWeight: "bold", color: "black", fontSize: 22 }}>{item.name}</Text>
+        <Text style={{color: "black", paddingTop: Constants.MAX_HEIGHT*.02, fontSize:20}}>{item.position}</Text>
       </View>
       <TouchableOpacity
         style={{
@@ -156,7 +156,7 @@ export default class Badges extends React.Component {
             keyExtractor={(item) => item.ID}
           />
         </View>
-        <MenuButton txtColor="white" text="GO BACK" onPress={this.handleReturnToHome}></MenuButton>
+        <MenuButton txtColor="black" text="GO BACK" onPress={this.handleReturnToHome}></MenuButton>
       </ImageBackground>
     );
   }

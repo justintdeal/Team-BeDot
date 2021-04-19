@@ -2,22 +2,21 @@
  * Level Select Screen
  */
 
-import React, {useEffect, useState} from "react";
-import { ImageBackground, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import MenuButton from "../components/MenuButton";
 import Background from "../assets/levelSelect.png";
 import { get, insert } from "../Db";
 
 export default function LevelSelect({ navigation }) {
-  const [unlocked, setLvls] = useState({"lvl2": null, "lvl3": null})
+  const [unlocked, setLvls] = useState({ lvl2: null, lvl3: null });
   useEffect(() => {
     async function unlockedLevels() {
       const lvl2 = await get("lvl2");
       const lvl3 = await get("lvl3");
 
-      setLvls({"lvl2": lvl2, "lvl3": lvl3})
-
-    } 
+      setLvls({ lvl2: lvl2, lvl3: lvl3 });
+    }
     unlockedLevels();
   }, []);
   //NAV CALLBACKS
@@ -28,8 +27,8 @@ export default function LevelSelect({ navigation }) {
     navigation.navigate("LevelTwo");
   };
   const launchLevelThree = () => {
-    navigation.navigate("LevelThree")
-  }
+    navigation.navigate("LevelThree");
+  };
   const goHome = () => {
     navigation.navigate("Home");
   };
@@ -37,29 +36,66 @@ export default function LevelSelect({ navigation }) {
   if (unlocked["lvl3"] != null) {
     return (
       <ImageBackground source={Background} style={styles.image}>
-        <MenuButton text="LIVING ROOM" onPress={launchLevelOne} txtColor={"white"}></MenuButton>
-        <MenuButton text="KITCHEN" onPress={launchLevelTwo} txtColor={"white"}></MenuButton>
-        <MenuButton text="BACKYARD" onPress={launchLevelThree} txtColor={"white"}></MenuButton>
-        <MenuButton text="GO BACK" onPress={goHome} txtColor={"white"}></MenuButton>
+        <MenuButton
+          text="LIVING ROOM"
+          onPress={launchLevelOne}
+          txtColor={"black"}
+        ></MenuButton>
+        <MenuButton
+          text="KITCHEN"
+          onPress={launchLevelTwo}
+          txtColor={"black"}
+        ></MenuButton>
+        <MenuButton
+          text="BACKYARD"
+          onPress={launchLevelThree}
+          txtColor={"black"}
+        ></MenuButton>
+        <MenuButton
+          text="GO BACK"
+          onPress={goHome}
+          txtColor={"black"}
+        ></MenuButton>
       </ImageBackground>
     );
   } else if (unlocked["lvl2"] != null) {
     return (
       <ImageBackground source={Background} style={styles.image}>
-        <MenuButton text="LIVING ROOM" onPress={launchLevelOne} txtColor={"white"}></MenuButton>
-        <MenuButton text="KITCHEN" onPress={launchLevelTwo} txtColor={"white"}></MenuButton>
-        <MenuButton text="GO BACK" onPress={goHome} txtColor={"white"}></MenuButton>
+        <View style={{marginTop: 75}}>
+          <MenuButton
+            text="LIVING ROOM"
+            onPress={launchLevelOne}
+            txtColor={"black"}
+          ></MenuButton>
+          <MenuButton
+            text="KITCHEN"
+            onPress={launchLevelTwo}
+            txtColor={"black"}
+          ></MenuButton>
+          <MenuButton
+            text="GO BACK"
+            onPress={goHome}
+            txtColor={"black"}
+          ></MenuButton>
+        </View>
       </ImageBackground>
     );
   } else {
     return (
       <ImageBackground source={Background} style={styles.image}>
-        <MenuButton text="LIVING ROOM" onPress={launchLevelOne} txtColor={"white"}></MenuButton>
-        <MenuButton text="GO BACK" onPress={goHome} txtColor={"white"}></MenuButton>
+        <MenuButton
+          text="LIVING ROOM"
+          onPress={launchLevelOne}
+          txtColor={"black"}
+        ></MenuButton>
+        <MenuButton
+          text="GO BACK"
+          onPress={goHome}
+          txtColor={"black"}
+        ></MenuButton>
       </ImageBackground>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -72,5 +108,5 @@ const styles = StyleSheet.create({
     flex: 1,
     top: 35,
     justifyContent: "center",
-  }
+  },
 });
