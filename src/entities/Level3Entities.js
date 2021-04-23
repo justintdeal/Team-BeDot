@@ -46,8 +46,8 @@ const Entities = () => {
   let dog = Matter.Bodies.rectangle(
     Constants.MAX_WIDTH * 0.75,
     Constants.MAX_HEIGHT * 0.86,
-    30,
-    30,
+    60,
+    60,
   );
   let top_wall = Matter.Bodies.rectangle(
     (x = 0),
