@@ -62,11 +62,13 @@ export default class LevelThree extends Component {
   handleCollectNote1 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
     this.setState({ note1ModalVisible: true });
+    this.timerRef.stopClock();
   };
 
   handleCollectNote2 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
     this.setState({ note2ModalVisible: true });
+    this.timerRef.stopClock();
   };
 
   async componentDidMount() {
@@ -231,6 +233,7 @@ export default class LevelThree extends Component {
           levelComplete={this.state.levelComplete}
           timeToLevel={this.getTime}
           currentLevel={"LevelThree"}
+          ref={(cd) => this.timerRef = cd}
         />
         <Modal
           animationType="slide"
@@ -303,6 +306,7 @@ export default class LevelThree extends Component {
                   onPress={() => {
                     this.setState({ note1ModalVisible: false });
                     this.setState({ note1Collected: true });
+                    this.timerRef.startClock();
                   }}
                 ></MenuButton>
               </View>
@@ -354,6 +358,7 @@ export default class LevelThree extends Component {
                   onPress={() => {
                     this.setState({ note2ModalVisible: false });
                     this.setState({ note2Collected: true });
+                    this.timerRef.startClock();
                   }}
                 ></MenuButton>
               </View>

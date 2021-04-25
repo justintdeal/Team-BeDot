@@ -89,6 +89,7 @@ export default class LevelOne extends Component {
   handleCollectNote1 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
     this.setState({ note1ModalVisible: true });
+    this.timerRef.stopClock();
   };
 
   // callback that is called when the user hits the Note Button
@@ -96,6 +97,7 @@ export default class LevelOne extends Component {
   handleCollectNote2 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
     this.setState({ note2ModalVisible: true });
+    this.timerRef.stopClock();
   };
   //callback that changes the level status to complete
   // called after contacting the stairs with a full inventory
@@ -249,6 +251,7 @@ export default class LevelOne extends Component {
             levelComplete={this.state.levelComplete}
             timeToLevel={this.getTime}
             currentLevel={"LevelOne"}
+            ref={(cd) => this.timerRef = cd}
           />
           <View style={{ alignItems: "flex-end" }}>
             <NoteButton
@@ -296,6 +299,7 @@ export default class LevelOne extends Component {
                       if (this.state.badgeEarned == null) {
                         this.setState({ markBadgeModal: true });
                       }
+                      this.timerRef.startClock();
                     }}
                   ></MenuButton>
                 </View>
@@ -375,6 +379,7 @@ export default class LevelOne extends Component {
                       if (this.state.badgeEarned == null) {
                         this.setState({ markBadgeModal: true });
                       }
+                      this.timerRef.startClock();
                     }}
                   ></MenuButton>
                 </View>

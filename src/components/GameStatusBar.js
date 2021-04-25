@@ -34,6 +34,14 @@ export default class GameStatusBar extends Component {
     this.props.pauseUpdater(false);
   };
 
+  stopClock() {
+    this.setState({paused: true});
+  }
+
+  startClock = () => {
+    this.setState({paused: false});
+  }
+
   handleResume = () => {
     this.setState({ paused: false });
     this.setState({ pauseModalVisible: false });

@@ -59,6 +59,7 @@ export default class LevelTwo extends Component {
   handleCollectNote1 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
     this.setState({ note1ModalVisible: true });
+    this.timerRef.stopClock();
   };
 
   // callback that is called when the user hits the Note Button
@@ -66,6 +67,7 @@ export default class LevelTwo extends Component {
   handleCollectNote2 = () => {
     this.setState({ inventorySize: this.state.inventorySize + 1 });
     this.setState({ note2ModalVisible: true });
+    this.timerRef.stopClock();
   }
 
  async componentDidMount() {
@@ -226,6 +228,7 @@ export default class LevelTwo extends Component {
           levelComplete={this.state.levelComplete}
           timeToLevel={this.getTime}
           currentLevel={"LevelTwo"}
+          ref={(cd) => this.timerRef = cd}
         />
         <View style={{ alignItems: "flex-end" }}>
           <NoteButton
@@ -284,6 +287,7 @@ export default class LevelTwo extends Component {
                   onPress={() => {
                     this.setState({ note1ModalVisible: false });
                     this.setState({ note1Collected: true});
+                    this.timerRef.startClock();
                   }}
                 ></MenuButton>
               </View>
@@ -327,6 +331,7 @@ export default class LevelTwo extends Component {
                   onPress={() => {
                     this.setState({ note2ModalVisible: false });
                     this.setState({ note2Collected: true});
+                    this.timerRef.startClock();
                   }}
                 ></MenuButton>
               </View>
