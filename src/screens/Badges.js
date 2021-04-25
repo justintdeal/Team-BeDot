@@ -1,3 +1,6 @@
+/*
+ * Badges Screen
+ */
 import React from "react";
 import {
   StyleSheet,

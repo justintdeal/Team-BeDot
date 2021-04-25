@@ -3,6 +3,7 @@
  * React Native Game Engine Lives Here
  * Maintains the state of the game
  */
+
 import React, { Component } from "react";
 import { Linking, StyleSheet, View, Modal, Text, ImageBackground } from "react-native";
 import { GameEngine } from "react-native-game-engine";
