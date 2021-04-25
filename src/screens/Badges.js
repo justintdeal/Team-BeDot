@@ -40,7 +40,7 @@ function Item({ item }) {
 }
 //Nav callbacks
 const goHome = () => {
-  navigation.navigate("Home");
+  navigation.pop();
 };
 
 export default class Badges extends React.Component {
@@ -51,7 +51,7 @@ export default class Badges extends React.Component {
     }
   }
   handleReturnToHome = () => {
-    this.props.navigation.replace("Home");
+    this.props.navigation.pop();
   };
 
 

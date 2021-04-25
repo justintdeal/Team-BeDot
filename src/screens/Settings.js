@@ -7,14 +7,24 @@ import { ImageBackground, StyleSheet, Text } from "react-native";
 import MenuButton from "../components/MenuButton";
 import Background from "../assets/settingsScreen.png";
 
-export default function Settings({ navigation }) {
+export default function Settings({ navigation}) {
+  const [soundOn, setSoundOn] = React.useState(true);
   // NAV CALLBACKS
   const goHome = () => {
     navigation.navigate("Home");
   };
 
+  const stopSound = () => {
+    // const sound = navigation.getParam('sound')
+    // if (sound) {
+      // sound.unloadAsync();
+    // }
+    setSoundOn(false);
+  }
+
   return (
     <ImageBackground source={Background} style={styles.image}>
+      <MenuButton text="STOP SOUND" txtColor={"black"} onPress={stopSound}></MenuButton>
       {/* <Text style={styles.modalText2}> Disclaimer:</Text>
       <Text style={styles.modalText}> This product is for educational and informational purposes only and is solely designed as a helpful tool for users to think about child safety and the devastating consequences of childhood injuries. </Text>
       <Text style={styles.modalText}> It is not intended to be a substitute for professional healthcare advice from the user’s service provider. Safety recommendations can change over time. Further, this application does not cover all areas of child safety necessary to prevent injuries and death of infants and toddlers. </Text>

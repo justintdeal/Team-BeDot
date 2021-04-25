@@ -21,16 +21,25 @@ export default function LevelSelect({ navigation }) {
   }, []);
   //NAV CALLBACKS
   const launchLevelOne = () => {
+    if (navigation.getParam("sound") !== undefined) {
+      navigation.getParam("sound").unloadAsync();
+    }
     navigation.navigate("LevelOne");
   };
   const launchLevelTwo = () => {
+    if (navigation.getParam("sound") !== undefined) {
+      navigation.getParam("sound").unloadAsync();
+    }
     navigation.navigate("LevelTwo");
   };
   const launchLevelThree = () => {
+    if (navigation.getParam("sound") !== undefined) {
+      navigation.getParam("sound").unloadAsync();
+    }
     navigation.navigate("LevelThree");
   };
   const goHome = () => {
-    navigation.navigate("Home");
+    navigation.pop();
   };
 
   if (unlocked["lvl3"] != null) {

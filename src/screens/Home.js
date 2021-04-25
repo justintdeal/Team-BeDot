@@ -3,19 +3,47 @@
  */
 
 import React, { useEffect, useState } from "react";
-import { View, ImageBackground, StyleSheet } from "react-native";
+import { View, ImageBackground, StyleSheet, Button } from "react-native";
 import MenuButton from "../components/MenuButton";
-import {get} from "../Db"
+import { get } from "../Db";
 import Background from "../assets/homescreen.png";
+import { Audio } from "expo-av";
 
 export default function Home({ navigation }) {
   const [unlocked, setLvls] = useState({ lvl2: null, lvl3: null });
+  const [sound, setSound] = React.useState();
+  async function playSound() {
+    Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+      playsInSilentModeIOS: true,
+      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+      shouldDuckAndroid: true,
+      staysActiveInBackground: true,
+      playThroughEarpieceAndroid: true,
+    });
+    console.log("Loading Sound");
+    const { sound } = await Audio.Sound.createAsync(
+      require("../assets/cry.mp3"),
+      {
+        shouldPlay: true,
+      }
+    );
+    setSound(sound);
+
+    console.log("Playing Sound");
+    await sound.playAsync();
+  }
   useEffect(() => {
     async function unlockedLevels() {
       const lvl2 = await get("lvl2");
       const lvl3 = await get("lvl3");
 
       setLvls({ lvl2: lvl2, lvl3: lvl3 });
+    }
+    console.log(sound)
+    if (sound == undefined) {
+      playSound();
     }
     unlockedLevels();
   }, []);
@@ -26,11 +54,11 @@ export default function Home({ navigation }) {
     } else if (unlocked["lvl2"] != null) {
       navigation.navigate("LevelTwo");
     } else {
-      navigation.navigate("LevelOne")
+      navigation.navigate("LevelOne");
     }
   };
   const handleLevelSelect = () => {
-    navigation.navigate("LevelSelect");
+    navigation.navigate("LevelSelect", { sound: sound });
   };
   const handleBadgeNav = () => {
     navigation.navigate("Badges");
@@ -39,7 +67,7 @@ export default function Home({ navigation }) {
     navigation.navigate("About");
   };
   const handleSettingNav = () => {
-    navigation.navigate("Settings");
+    navigation.navigate("Settings", { sound: sound });
   };
 
   return (
@@ -65,11 +93,11 @@ export default function Home({ navigation }) {
           onPress={handleAboutNav}
           txtColor={"black"}
         ></MenuButton>
-        <MenuButton
-          text="SETTINGS"
-          onPress={handleSettingNav}
-          txtColor={"black"}
-        ></MenuButton>
+        {/* <MenuButton */}
+          {/* text="SETTINGS" */}
+          {/* onPress={handleSettingNav} */}
+          {/* txtColor={"black"} */}
+        {/* ></MenuButton> */}
       </View>
     </ImageBackground>
   );
@@ -85,7 +113,7 @@ const styles = StyleSheet.create({
     flex: 1,
     top: 55,
     justifyContent: "center",
-    marginTop: 50,
+    marginTop: 90,
   },
   button: {
     color: "black",

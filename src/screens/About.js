@@ -10,7 +10,7 @@ import Background from "../assets/aboutScreen.png";
 export default function About({ navigation }) {
   //NAV CALLBACK
   const goHome = () => {
-    navigation.navigate("Home");
+    navigation.pop();
   };
 
   return (
