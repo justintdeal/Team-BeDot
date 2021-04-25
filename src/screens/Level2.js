@@ -1,5 +1,10 @@
+/*
+ * Level Two Screen
+ * React Native Game Engine Lives Here
+ * Maintains the state of the game
+ */
 import React, { Component } from "react";
-import { StyleSheet, View, Modal, Text, ImageBackground } from "react-native";
+import { Linking, StyleSheet, View, Modal, Text, ImageBackground } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Movement from "../systems/Movement";
 import Entities from "../entities/Level2Entities";
@@ -158,11 +163,9 @@ export default class LevelTwo extends Component {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>
-                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL.
-                </Text>
+                Collect All The Notes To Progress To The Next Level. </Text>
                 <Text style={styles.modalText}>
-                THEN GRAB A DRINK FROM THE FRIDGE.
-                </Text>
+                Then grab a drink from the fridge.</Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
                 <MenuButton
                   text="OK"
@@ -248,7 +251,7 @@ export default class LevelTwo extends Component {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-              <Text style={styles.modalText}>
+              <Text style={styles.modalTitle}>
                 Fires & Burns 
                 </Text>
                 <Text style={styles.modalText}>
@@ -272,7 +275,7 @@ export default class LevelTwo extends Component {
                 <Text style={styles.modalText}>
                 Do not wear loose-fitted clothing that has the potential to catch fire. 
                 </Text>
-                <Text style={styles.modalText}>
+                <Text style={styles.modalText} onPress={() => { Linking.openURL('https://kidshealth.org/en/parents/fire.html'); }}>
                 Source: https://kidshealth.org/en/parents/fire.html 
                 </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
@@ -297,7 +300,7 @@ export default class LevelTwo extends Component {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-              <Text style={styles.modalText}>
+              <Text style={styles.modalTitle}>
                 Poisons 
                 </Text>
                 <Text style={styles.modalText}>
@@ -315,7 +318,7 @@ export default class LevelTwo extends Component {
                 <Text style={styles.modalText}>
                 Lock them up and keep them away. Keep medicines and other potentially toxic products, such as cleaners and detergents, in their original packaging where children cannot see or get to them. Read the label. Throw away if not needed. 
                 </Text>
-                <Text style={styles.modalText}>
+                <Text style={styles.modalText} onPress={() => { Linking.openURL('https://www.cdc.gov/safechild/poisoning/index.html'); }}>
                 Source: https://www.cdc.gov/safechild/poisoning/index.html  
                 </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
@@ -397,6 +400,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalText: {
+    marginBottom: 15,
+    fontWeight: "normal",
+    textAlign: "center",
+  },
+  modalTitle: {
     marginBottom: 15,
     fontWeight: "bold",
     textAlign: "center",

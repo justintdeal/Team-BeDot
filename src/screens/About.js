@@ -18,7 +18,7 @@ export default function About({ navigation }) {
       {/* <Text style={styles.modalText, {marginTop: 100}}> Welcome to Child Safe!</Text> */}
       {/* <Text style={styles.modalText}> Team: Sora Bang, Justin Deal, Jayla Demaine, Elina Ebby, Sam Thomas, David Okao</Text> */}
       <View style={styles.contain}>
-      <Text style={styles.modalText}> Team Client: Ann McClellan</Text>
+      <Text style={styles.modalText}> Team Client: Dr. Ann McClellan</Text>
       <Text style={styles.disclaimer}> Disclaimer: </Text>
       <Text style={styles.disclaimer}> This product is for educational and informational purposes only and is solely designed as a helpful tool for users to think about child safety and the devastating consequences of childhood injuries. </Text>
       <Text style={styles.disclaimer}> It is not intended to be a substitute for professional healthcare advice from the user’s service provider. Safety recommendations can change over time. Further, this application does not cover all areas of child safety necessary to prevent injuries and death of infants and toddlers. </Text>
@@ -48,5 +48,6 @@ const styles = StyleSheet.create({
   disclaimer: {
     fontSize: 10,
     marginTop: 4,
+    marginLeft: 10,
   }
 });

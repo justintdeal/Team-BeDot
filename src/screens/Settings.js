@@ -19,7 +19,7 @@ export default function Settings({ navigation }) {
       <Text style={styles.modalText}> This product is for educational and informational purposes only and is solely designed as a helpful tool for users to think about child safety and the devastating consequences of childhood injuries. </Text>
       <Text style={styles.modalText}> It is not intended to be a substitute for professional healthcare advice from the user’s service provider. Safety recommendations can change over time. Further, this application does not cover all areas of child safety necessary to prevent injuries and death of infants and toddlers. </Text>
       <Text style={styles.modalText}> Users are strongly encouraged to seek more comprehensive safety information and advice from their healthcare service provider. Information presented in this application is provided in good faith and reflects current childcare practices as expressed by experts in the field. </Text> */}
-      <MenuButton text="GO BACK" txtColor={"white"} onPress={goHome}></MenuButton>
+      <MenuButton text="GO BACK" txtColor={"black"} onPress={goHome}></MenuButton>
     </ImageBackground>
   );
 }

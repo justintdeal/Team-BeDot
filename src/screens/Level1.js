@@ -2,11 +2,10 @@
  * Level One Screen
  * React Native Game Engine Lives Here
  * Maintains the state of the game
- * is ugly rn because I need to modularize the modals
  */
 
 import React, { Component } from "react";
-import { StyleSheet, View, Modal, Text, ImageBackground } from "react-native";
+import { Linking, StyleSheet, View, Modal, Text, ImageBackground } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Entities from "../entities/Level1Entities";
 import Dispatches from "../systems/Level1Dispatches";
@@ -168,7 +167,7 @@ export default class LevelOne extends Component {
       this.handleLevelComplete();
     }
   };
-
+  
   render() {
     const { modalVisible } = this.state;
     return (
@@ -187,8 +186,9 @@ export default class LevelOne extends Component {
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                   <Text style={styles.modalText}>
-                    COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL
-                  </Text>
+                  Collect All The Notes To Progress To The Next Level.</Text>
+                  <Text style={styles.modalText}>
+                    Then go the stairs to finish the level. </Text>
                   <Text style={styles.textStyle}>Hide Modal</Text>
                   <MenuButton
                     text="OK"
@@ -274,7 +274,7 @@ export default class LevelOne extends Component {
             >
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                  <Text style={styles.modalText}>Coins:</Text>
+                  <Text style={styles.modalTitle}>Coins:</Text>
                   <Text style={styles.modalText}>
                     Choose a toy chest without a lid. Toys should be large
                     enough — at least 1¼" (3 centimeters) in diameter and 2¼" (6
@@ -284,9 +284,9 @@ export default class LevelOne extends Component {
                     diameter or less because they can become lodged in the
                     throat above the windpipe and cause trouble with breathing.
                   </Text>
-                  <Text style={styles.modalText}>
+                   <Text style={styles.modalText} onPress={() => { Linking.openURL('https://kidshealth.org/en/parents/products-toys.html') }}>
                     Source: https://kidshealth.org/en/parents/products-toys.html
-                  </Text>
+                  </Text> 
                   <Text style={styles.textStyle}>Hide Modal</Text>
                   <MenuButton
                     text="OK"
@@ -338,7 +338,7 @@ export default class LevelOne extends Component {
             >
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                  <Text style={styles.modalText}>Outlets:</Text>
+                  <Text style={styles.modalTitle}>Outlets:</Text>
                   <Text style={styles.modalText}>
                     Outlet Covers are great solutions to prevent accidental
                     electrocutions. Nearly one-third of accidents occur when a
@@ -363,7 +363,7 @@ export default class LevelOne extends Component {
                     children whose skin is thin and offers little resistance to
                     electric flow or heat.
                   </Text>
-                  <Text style={styles.modalText}>
+                  <Text style={styles.modalText} onPress={() => { Linking.openURL('https://mrelectric.com/child-proof-outlets'); }}>
                     Source: https://mrelectric.com/child-proof-outlets
                   </Text>
                   <Text style={styles.textStyle}>Hide Modal</Text>
@@ -449,6 +449,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalText: {
+    marginBottom: 15,
+    fontWeight: "normal",
+    textAlign: "center",
+  },
+  modalTitle: {
     marginBottom: 15,
     fontWeight: "bold",
     textAlign: "center",

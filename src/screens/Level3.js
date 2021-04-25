@@ -1,5 +1,11 @@
+/*
+ * Level Three Screen
+ * React Native Game Engine Lives Here
+ * Maintains the state of the game
+ */
+
 import React, { Component } from "react";
-import { StyleSheet, View, Modal, Text, ImageBackground } from "react-native";
+import { Linking, StyleSheet, View, Modal, Text, ImageBackground } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Movement from "../systems/Movement";
 import Entities from "../entities/Level3Entities";
@@ -160,8 +166,9 @@ export default class LevelThree extends Component {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>
-                  COLLECT ALL THE NOTES TO PROGRESS TO THE NEXT LEVEL.
-                  <Text style={styles.modalText}></Text>
+                  Collect All The Notes To Progress To The Next Level.
+                  </Text>
+                  <Text style={styles.modalText}>
                   Then go pet the nice doggo.
                 </Text>
                 <Text style={styles.textStyle}>Hide Modal</Text>
@@ -272,7 +279,7 @@ export default class LevelThree extends Component {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Hot Car</Text>
+                <Text style={styles.modalTitle}>Hot Car</Text>
                 <Text style={styles.modalText}>
                   Children dying from heatstroke in cars, either because they
                   were left or became trapped, has increased in the recent
@@ -286,7 +293,7 @@ export default class LevelThree extends Component {
                   forgets a child in a car. Nearly 75% of children who are
                   forgotten and die are under 2 years old.
                 </Text>
-                <Text style={styles.modalText}>
+                <Text style={styles.modalText} onPress={() => { Linking.openURL('https://www.nhtsa.gov/child-safety/help-prevent-hot-car-deaths'); }}>
                   Source:
                   https://www.nhtsa.gov/child-safety/help-prevent-hot-car-deaths
                 </Text>
@@ -313,7 +320,7 @@ export default class LevelThree extends Component {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Drowning:</Text>
+                <Text style={styles.modalTitle}>Drowning:</Text>
                 <Text style={styles.modalText}>
                   Drowning is the leading cause of injury death in children 1 –
                   4.
@@ -337,7 +344,7 @@ export default class LevelThree extends Component {
                   temporary pools, should be completely surrounded by a fence on
                   all 4 sides.
                 </Text>
-                <Text style={styles.modalText}>
+                <Text style={styles.modalText} onPress={() => { Linking.openURL('https://www.healthychildren.org/English/safety-prevention/at-play/Pages/Water-Safety-And-Young-Children.aspx'); }}>
                   Source:
                   https://www.healthychildren.org/English/safety-prevention/at-play/Pages/Water-Safety-And-Young-Children.aspx
                 </Text>
@@ -420,6 +427,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalText: {
+    marginBottom: 15,
+    fontWeight: "normal",
+    textAlign: "center",
+  },
+  modalTitle: {
     marginBottom: 15,
     fontWeight: "bold",
     textAlign: "center",
