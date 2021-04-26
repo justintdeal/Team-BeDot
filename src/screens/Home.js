@@ -24,7 +24,7 @@ export default function Home({ navigation }) {
     });
     console.log("Loading Sound");
     const { sound } = await Audio.Sound.createAsync(
-      require("../assets/cry.mp3"),
+      require("../assets/gameMusic.mp3"),
       {
         shouldPlay: true,
       }
