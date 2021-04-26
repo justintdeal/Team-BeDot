@@ -49,6 +49,7 @@ export default function Home({ navigation }) {
   }, []);
   //Nav Callbacks
   const handlePlayNow = () => {
+    sound.unloadAsync();
     if (unlocked["lvl3"] != null) {
       navigation.navigate("LevelThree");
     } else if (unlocked["lvl2"] != null) {
